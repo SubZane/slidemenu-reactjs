@@ -1,0 +1,60 @@
+/* Effect 2: Slide from the right */
+.am-effect-2 .content {
+	transform: translateX(20%);
+	opacity: 0;
+	transition: all $transitiontime cubic-bezier(0.25, 0.5, 0.5, 0.9);
+}
+
+.am-show.am-effect-2 .content {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+/* Effect 3: Slide from the bottom */
+.am-effect-3 .content {
+	transform: translateY(20%);
+	opacity: 0;
+	transition: all $transitiontime;
+}
+
+.am-show.am-effect-3 .content {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+
+/* Effect 7:  slide and stick to top */
+.am-effect-7{
+	top: 0;
+	transform: translateX(-50%);
+}
+
+.am-effect-7 .content {
+	transform: translateY(-200%);
+	transition: all .3s;
+	opacity: 0;
+}
+
+.am-show.am-effect-7 .content {
+	transform: translateY(0%);
+	border-radius: 0 0 3px 3px;
+	opacity: 1;
+}
+
+/* Effect 10: 3D sign */
+.am-effect-10.Panel {
+	perspective: 1300px;
+}
+
+.am-effect-10 .content {
+	transform-style: preserve-3d;
+	transform: rotateX(-60deg);
+	transform-origin: 50% 0;
+	opacity: 0;
+	transition: all $transitiontime;
+}
+
+.am-show.am-effect-10 .content {
+	transform: rotateX(0deg);
+	opacity: 1;
+}
