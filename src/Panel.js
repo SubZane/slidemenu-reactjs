@@ -40,11 +40,19 @@ const Panel = styled.div`
 	`}
 
 	@media (min-width: 768px) {
-    left: 0;
-    width: 50%;
-    max-width: 450px;
-		right: 0;
+		${props => props.animation === 'door-left' && css`
+			right: auto;
+		`}
+		${props => props.animation === 'door-right' && css`
+			left: auto;
+		`}
+    width: 30%;
 		border-radius: 0 5px;
+		${props => props.animation === 'flip-bottom' && css`
+	    width: 600px;
+			left: 50%;
+			margin-left: -300px; /* Half of the width */
+		`}
 	}
 `
 

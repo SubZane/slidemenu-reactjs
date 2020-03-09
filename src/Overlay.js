@@ -41,7 +41,7 @@ const Overlay = styled.div`
 	${props => props.hide && css`
 		display: none;
 	`}
-`
+`;
 
 function OverlayContainer (props) {
 	return (

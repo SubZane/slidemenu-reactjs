@@ -24,12 +24,6 @@ html {
 }
 `
 
-FlyPanels.defaultProps = {
-  animation: 'door-left',
-	transitionDuration: '0.5s',
-	borderRadius: '5px'
-};
-
 function FlyPanels(props) {
 	const [togglePanel, setTogglePanel] = useState(false);
 	const [isPanelVisible, setPanelVisible] = useState(false);
@@ -38,6 +32,15 @@ function FlyPanels(props) {
 	const [hideOverlay, setHideOverlay] = useState(false);
 	const [fadeout, setFadeout] = useState(false);
 	const [fadein, setFadein] = useState(false);
+	const [isPanelButtonVisible, setIsPanelButtonVisible] = useState(true);
+
+
+	useEffect(() => {
+		if (props.customButtonReference) {
+			props.customButtonReference.current.addEventListener('click', openPanel)
+			setIsPanelButtonVisible(false)
+		}
+	}, [props.customButtonReference]);
 
 	useEffect(() => {
 	if (togglePanel) {
@@ -99,8 +102,8 @@ function FlyPanels(props) {
 			onTransitionEnd={onPanelTransitionEnd}
 			children={props.children}
 		/>
+		{	isPanelButtonVisible && <PanelButton handleEvent={openPanel}></PanelButton> }
 
-		<PanelButton handleEvent={openPanel}></PanelButton>
 	</React.Fragment>
   );
 }

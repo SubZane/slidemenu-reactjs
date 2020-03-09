@@ -4,7 +4,6 @@ import styled, {css} from 'styled-components';
 const Content = styled.div`
 	color: #fff;
 	background: #e74c3c;
-	margin: 0 auto;
 	max-width: 600px;
 	overflow: hidden;
 	position: absolute;
