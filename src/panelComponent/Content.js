@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components';
 
 const Content = styled.div`
 	color: #fff;
-	background: #e74c3c;
+	background: ${props => props.backgroundColor || "#fff"};
 	max-width: 600px;
 	overflow: hidden;
 	position: absolute;
@@ -70,14 +70,16 @@ const Content = styled.div`
 
 const Inner = styled.div`
 	overflow-y: auto;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: ${props => props.innerPadding || "20px"};
+	padding-right: ${props => props.innerPadding || "20px"};
 	margin: 0;
 	font-weight: 300;
 	font-size: 1.15em;
 	position: absolute;
-	bottom: 20px;
-	top: 20px;
+	bottom: ${props => props.innerPadding || "20px"};
+	top: ${props => props.innerPadding || "20px"};
+	right: 0;
+	left: 0;
 `
 
 
@@ -87,8 +89,9 @@ function PanelContent (props) {
 			borderRadius={props.borderRadius}
 			visible={props.visible}
 			animation={props.animation}
+			backgroundColor={props.backgroundColor}
 			transitionDuration={props.transitionDuration}l>
-			<Inner>
+			<Inner innerPadding={props.innerPadding}>
 				{props.children}
 			</Inner>
 		</Content>

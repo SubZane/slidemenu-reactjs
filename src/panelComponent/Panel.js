@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-import Content from './PanelContent'
+import Content from './Content'
 
 const Panel = styled.div`
 	position: fixed;
@@ -65,11 +65,13 @@ function PanelContainer (props) {
 			onTransitionEnd={props.onTransitionEnd}>
 
 			<Content
+				innerPadding={props.innerPadding}
 				borderRadius={props.borderRadius}
 				visible={props.visible}
 				animation={props.animation}
 				children={props.children}
-				transitionDuration={props.transitionDuration}l
+				transitionDuration={props.transitionDuration}
+				backgroundColor={props.backgroundColor}
 			/>
 
 		</Panel>

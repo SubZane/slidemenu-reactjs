@@ -1,33 +1,38 @@
 import React, {} from 'react';
 import ReactDOM from 'react-dom';
-import FlyPanels from './FlyPanels';
+import FlyPanels from './panelComponent/App';
+import Slidemenu from './menuComponent/App'
 
+/*
 const mybutton = React.createRef();
+<button className="custombutton" ref={mybutton}>test</button>
+*/
 
+import menudataJSON from './menudata.json'
 ReactDOM.render (
+
 	<React.Fragment>
 		<FlyPanels
-			animation={"flip-bottom"}
+			animation={"door-left"}
 			transitionDuration={"0.5s"}
 			borderRadius={"7px"}
 			customButtonReference={false}
+			innerPadding={"0px"}
+			backgroundColor={"#E3DFDA"}
+			buttonPosition={"right"}
+			buttonBackgroundColor={"#8DBFD1"}
+			buttonColor={"#fff"}
 		>
-				<p>Sed posuere consectetur est at lobortis. Sed posuere consectetur est at lobortis. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-				<p>Sed posuere consectetur est at lobortis. Sed posuere consectetur est at lobortis. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-				<p>Sed posuere consectetur est at lobortis. Sed posuere consectetur est at lobortis. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-				<p>Sed posuere consectetur est at lobortis. Sed posuere consectetur est at lobortis. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-				<p>Sed posuere consectetur est at lobortis. Sed posuere consectetur est at lobortis. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-				<p>Sed posuere consectetur est at lobortis. Sed posuere consectetur est at lobortis. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
+			<Slidemenu
+				backgroundColor={"#EAE9E3"}
+				textColor={"#3D3B39"}
+				menuWidth={"100%"}
+				transitionDuration={"0.3s"}
+				menuDataSource={menudataJSON.treemenu}
+				backButtonText={"Go back"}
+			/>
 		</FlyPanels>
-		<button className="custombutton" ref={mybutton}>test</button>
-		<div></div>
-		</React.Fragment>
+	</React.Fragment>
 		,
 	document.getElementById('root')
 );

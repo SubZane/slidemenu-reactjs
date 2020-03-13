@@ -95,14 +95,16 @@ function FlyPanels(props) {
 		/>
 
 		<Panel
+			innerPadding={props.innerPadding}
 			borderRadius={props.borderRadius}
 			animation={props.animation}
 			visible={isPanelVisible}
 			transitionDuration={props.transitionDuration}
 			onTransitionEnd={onPanelTransitionEnd}
 			children={props.children}
+			backgroundColor={props.backgroundColor}
 		/>
-		{	isPanelButtonVisible && <PanelButton handleEvent={openPanel}></PanelButton> }
+		{	isPanelButtonVisible && <PanelButton buttonBackgroundColor={props.buttonBackgroundColor} buttonColor={props.buttonColor} position={props.buttonPosition} handleEvent={openPanel}></PanelButton> }
 
 	</React.Fragment>
   );
