@@ -1,16 +1,16 @@
-import React from 'react';
-import styled, {css} from 'styled-components';
+import React from 'react'
+import styled, { css } from 'styled-components'
 
 type PanelButtonType = {
-	backgroundColor: string,
-	position: string,
+	backgroundColor: string
+	position: string
 	buttonColor: string
 }
 
 const PanelButton = styled.div<PanelButtonType>`
 	position: fixed;
 	width: 50px;
-	background-color: ${props => props.backgroundColor || "coral"};
+	background-color: ${props => props.backgroundColor || 'coral'};
 	color: white;
 	font-weight: bold;
 	border-radius: 50px;
@@ -19,22 +19,28 @@ const PanelButton = styled.div<PanelButtonType>`
 	&:focus {outline:0;}
 	z-index: 50;
 	cursor: pointer;
-	${props => props.position === 'center' && css`
-		bottom: 20px;
-		left: 50%;
-		margin-left: -25px;
-  `}
-	${props => props.position === 'left' && css`
-		bottom: 20px;
-		left: 20px;
-  `}
-	${props => props.position === 'right' && css`
-		bottom: 20px;
-		right: 20px;
-  `}
+	${props =>
+		props.position === 'center' &&
+		css`
+			bottom: 20px;
+			left: 50%;
+			margin-left: -25px;
+		`}
+	${props =>
+		props.position === 'left' &&
+		css`
+			bottom: 20px;
+			left: 20px;
+		`}
+	${props =>
+		props.position === 'right' &&
+		css`
+			bottom: 20px;
+			right: 20px;
+		`}
 	&:after {
 		right: 16px;
-    color: ${props => props.buttonColor || "#fff"};
+    color: ${props => props.buttonColor || '#fff'};
     position: absolute;
     top: 1px;
     line-height: 50px;
@@ -47,15 +53,20 @@ const PanelButton = styled.div<PanelButtonType>`
 `
 
 interface PanelContentProps {
-	buttonBackgroundColor: string,
-	position: string,
-	buttonColor: string,
+	buttonBackgroundColor: string
+	position: string
+	buttonColor: string
 	handleEvent: () => void
 }
 
-function PanelButtonContainer (props: PanelContentProps) {
+function PanelButtonContainer(props: PanelContentProps) {
 	return (
-		<PanelButton backgroundColor={props.buttonBackgroundColor} buttonColor={props.buttonColor} position={props.position} onClick={props.handleEvent}></PanelButton>
+		<PanelButton
+			backgroundColor={props.buttonBackgroundColor}
+			buttonColor={props.buttonColor}
+			position={props.position}
+			onClick={props.handleEvent}
+		></PanelButton>
 	)
 }
 

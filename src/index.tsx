@@ -9,31 +9,28 @@ const mybutton = React.createRef();
 */
 
 import menudataJSON from './menudata.json'
-ReactDOM.render (
-
+ReactDOM.render(
 	<React.Fragment>
 		<FlyPanels
-			animation={"door-left"}
-			transitionDuration={"0.5s"}
-			borderRadius={"7px"}
+			animation={'door-left'}
+			transitionDuration={'0.5s'}
+			borderRadius={'7px'}
 			customButtonReference={false}
-			innerPadding={"0px"}
-			backgroundColor={"#E3DFDA"}
-			buttonPosition={"right"}
-			buttonBackgroundColor={"#8DBFD1"}
-			buttonColor={"#fff"}
+			innerPadding={'0px'}
+			backgroundColor={'#E3DFDA'}
+			buttonPosition={'right'}
+			buttonBackgroundColor={'#8DBFD1'}
+			buttonColor={'#fff'}
 		>
 			<Slidemenu
-				backgroundColor={"#EAE9E3"}
-				textColor={"#3D3B39"}
-				menuWidth={"100%"}
-				transitionDuration={"0.3s"}
+				backgroundColor={'#EAE9E3'}
+				textColor={'#3D3B39'}
+				menuWidth={'100%'}
+				transitionDuration={'0.3s'}
 				menuDataSource={menudataJSON.treemenu}
-				backButtonText={"Go back"}
+				backButtonText={'Go back'}
 			/>
 		</FlyPanels>
-	</React.Fragment>
-		,
-
+	</React.Fragment>,
 	document.getElementById('root')
-);
+)

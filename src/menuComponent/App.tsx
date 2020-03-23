@@ -5,21 +5,21 @@ import Node from './Node'
 import Breadcrumbs from './Breadcrumbs'
 
 type MenuWrapperType = {
-	backgroundColor: string,
+	backgroundColor: string
 	menuWidth: string
 }
 
-const MenuWrapper = styled.div<MenuWrapperType> `
+const MenuWrapper = styled.div<MenuWrapperType>`
 	background: ${props => props.backgroundColor};
 	position: relative;
-`;
+`
 
 interface SlidemenuProps {
-	backgroundColor: string,
-	textColor: string,
-	menuWidth: string,
-	transitionDuration: string,
-	menuDataSource: Array<any>,
+	backgroundColor: string
+	textColor: string
+	menuWidth: string
+	transitionDuration: string
+	menuDataSource: Array<any>
 	backButtonText: string
 }
 
@@ -29,18 +29,18 @@ function Slidemenu(props: SlidemenuProps) {
 	const [showEvenBackLink, setShowEvenBackLink] = useState<boolean>(false)
 	const [showOddBackLink, setShowOddBackLink] = useState<boolean>(false)
 
-	const [menuData, loadMenuData] = useState<Array<any>>([]);
+	const [menuData, loadMenuData] = useState<Array<any>>([])
 	const [evenMenuData, setEvenMenuData] = useState<Array<any>>([])
 	const [oddMenuData, setOddMenuData] = useState<Array<any>>([])
 
-	const [nodeLevel, setNodeLevel] = useState<number>(0);
+	const [nodeLevel, setNodeLevel] = useState<number>(0)
 	const [parentKeys, setParentKeys] = useState<Array<any>>([])
 	const [condition, setCondition] = useState<string>('')
 
-	const [oddFade, setOddFade] = useState<string>('');
+	const [oddFade, setOddFade] = useState<string>('')
 	const [oddDirection, setOddDirection] = useState('left')
 
-	const [evenFade, setEvenFade] = useState<string>('');
+	const [evenFade, setEvenFade] = useState<string>('')
 	const [evenDirection, setEvenDirection] = useState<string>('left')
 
 	const [breadcrumbs, setBreadcrumbs] = useState<Array<any>>([])
@@ -48,7 +48,7 @@ function Slidemenu(props: SlidemenuProps) {
 	useEffect(() => {
 		loadMenuData(props.menuDataSource)
 		setEvenMenuData(props.menuDataSource)
-	}, [props.menuDataSource]);
+	}, [props.menuDataSource])
 
 	function resetFadeStates() {
 		setOddFade('')
@@ -60,7 +60,7 @@ function Slidemenu(props: SlidemenuProps) {
 		// console.log('condition: ' + condition);
 		// console.log('-----------------');
 		if (condition === 'open') {
-			if ( nodeLevel % 2 === 0) {
+			if (nodeLevel % 2 === 0) {
 				setEvenNodeVisible(true)
 				setEvenDirection('left')
 				setEvenFade('in')
@@ -76,7 +76,7 @@ function Slidemenu(props: SlidemenuProps) {
 				setEvenFade('out')
 			}
 		} else if (condition === 'close') {
-			if ( nodeLevel % 2 === 0) {
+			if (nodeLevel % 2 === 0) {
 				setEvenNodeVisible(true)
 				setEvenDirection('right')
 				setEvenFade('in')
@@ -104,53 +104,51 @@ function Slidemenu(props: SlidemenuProps) {
 		}
 	}, [nodeLevel])
 
-	function OpenNode(id: number, title:string) {
+	function OpenNode(id: number, title: string) {
 		setCondition('open')
 		setNodeLevel(nodeLevel + 1)
 		const parent = {
-			"id": id,
-			"Title": title,
-			"nodeLevel": (nodeLevel + 1)
+			id: id,
+			Title: title,
+			nodeLevel: nodeLevel + 1
 		}
 		setParentKeys(prevArray => [...prevArray, parent])
 
-		if ( nodeLevel % 2 === 0) {
+		if (nodeLevel % 2 === 0) {
 			const obj = evenMenuData.filter(p => p.id === id)
-				if (obj.length > 0) {
+			if (obj.length > 0) {
 				setOddMenuData(obj.shift().subnodes)
 			}
 		} else {
 			const obj = oddMenuData.filter(p => p.id === id)
-				if (obj.length > 0) {
+			if (obj.length > 0) {
 				setEvenMenuData(obj.shift().subnodes)
 			}
 		}
-
 	}
 
 	useEffect(() => {
 		setBreadcrumbs(parentKeys)
-	}, [parentKeys]);
+	}, [parentKeys])
 
 	function CloseNode() {
 		setCondition('close')
-		setNodeLevel(nodeLevel -1)
+		setNodeLevel(nodeLevel - 1)
 
 		setParentKeys(prevKeys => prevKeys.splice(0, prevKeys.length - 1))
 
-
 		if (parentKeys.length > 1) {
-			const parentNode = parentKeys[parentKeys.length-2]
+			const parentNode = parentKeys[parentKeys.length - 2]
 			const obj = findNode(menuData, parentNode.id)
 			const menuitems = obj[0].subnodes
 
-			if ( nodeLevel % 2 === 0) {
+			if (nodeLevel % 2 === 0) {
 				setOddMenuData(menuitems)
 			} else {
 				setEvenMenuData(menuitems)
 			}
 		} else {
-			if ( nodeLevel % 2 === 0) {
+			if (nodeLevel % 2 === 0) {
 				setOddMenuData(menuData)
 			} else {
 				setEvenMenuData(menuData)
@@ -161,7 +159,7 @@ function Slidemenu(props: SlidemenuProps) {
 	function onNodeAnimationEnded() {
 		resetFadeStates()
 
-		if ( nodeLevel % 2 === 0) {
+		if (nodeLevel % 2 === 0) {
 			setOddNodeVisible(false)
 			setShowOddBackLink(false)
 		} else {
@@ -170,9 +168,12 @@ function Slidemenu(props: SlidemenuProps) {
 		}
 	}
 
-  return (
+	return (
 		<React.Fragment>
-			<MenuWrapper backgroundColor={props.backgroundColor} menuWidth={props.menuWidth}>
+			<MenuWrapper
+				backgroundColor={props.backgroundColor}
+				menuWidth={props.menuWidth}
+			>
 				<Breadcrumbs textColor={props.textColor} breadcrumbs={breadcrumbs} />
 
 				<Node
@@ -204,11 +205,9 @@ function Slidemenu(props: SlidemenuProps) {
 					textColor={props.textColor}
 					backButtonText={props.backButtonText}
 				/>
-
 			</MenuWrapper>
 		</React.Fragment>
-  );
+	)
 }
 
 export default Slidemenu
-

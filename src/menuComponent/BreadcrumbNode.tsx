@@ -1,5 +1,5 @@
-import React  from 'react'
-import styled, { keyframes } from 'styled-components';
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
 const FadeInTop = keyframes`
   0% {
@@ -10,9 +10,9 @@ const FadeInTop = keyframes`
     transform: translateX(0);
     opacity: 1;
   }
-`;
+`
 
-const NodeItem = styled.li `
+const NodeItem = styled.li`
 	font-size: 14px;
 	font-weight: 400;
 	margin-bottom: 8px;
@@ -54,7 +54,7 @@ const NodeItem = styled.li `
 			background: #D2D1CB;
 		}
 	}
-`;
+`
 
 type CrumbType = {
 	textColor: string
@@ -63,19 +63,21 @@ type CrumbType = {
 const CrumbItem = styled.span<CrumbType>`
 	color: ${props => props.textColor};
 	display: inline-block;
-`;
+`
 
 interface BreadCrumbProps {
-	key: number,
-	id: number,
-	title: string,
+	key: number
+	id: number
+	title: string
 	textColor: string
 }
 
 function BreadcrumbNode(props: BreadCrumbProps) {
 	return (
 		<NodeItem key={props.id}>
-			<CrumbItem textColor={props.textColor} key={props.id}>{props.title}</CrumbItem>
+			<CrumbItem textColor={props.textColor} key={props.id}>
+				{props.title}
+			</CrumbItem>
 		</NodeItem>
 	)
 }
