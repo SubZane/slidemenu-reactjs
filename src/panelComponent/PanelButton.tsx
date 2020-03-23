@@ -1,7 +1,13 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 
-const PanelButton = styled.div`
+type PanelButtonType = {
+	backgroundColor: string,
+	position: string,
+	buttonColor: string
+}
+
+const PanelButton = styled.div<PanelButtonType>`
 	position: fixed;
 	width: 50px;
 	background-color: ${props => props.backgroundColor || "coral"};
@@ -40,7 +46,14 @@ const PanelButton = styled.div`
 	}
 `
 
-function PanelButtonContainer (props) {
+interface PanelContentProps {
+	buttonBackgroundColor: string,
+	position: string,
+	buttonColor: string,
+	handleEvent: () => void
+}
+
+function PanelButtonContainer (props: PanelContentProps) {
 	return (
 		<PanelButton backgroundColor={props.buttonBackgroundColor} buttonColor={props.buttonColor} position={props.position} onClick={props.handleEvent}></PanelButton>
 	)

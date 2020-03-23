@@ -1,9 +1,14 @@
 import React from "react"
 import styled, {css} from 'styled-components';
 
-const NodeLink = styled.a `
+type NodeTypes = {
+	textColor: string,
+	hasChildren: boolean
+}
+
+const NodeLink = styled.a<NodeTypes> `
 	display: block;
-	color: ${props => props.textColor || "#333"};
+	color: ${props => props.textColor};
 	text-decoration: none;
 	font-size: 14px;
 	padding: 15px 20px;
@@ -13,16 +18,16 @@ const NodeLink = styled.a `
 	position: relative;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 	&:hover {
-		color: ${props => props.textColor || "#333"};
+		color: ${props => props.textColor};
 		background: rgba(0,0,0,0.1);
 		text-decoration: none;
 	}
 	&:not([href]):hover {
 		background: rgba(0,0,0,0.1);
-		color: ${props => props.textColor || "#333"};
+		color: ${props => props.textColor};
 	}
 	&:not([href]) {
-			color: ${props => props.textColor || "#333"};
+			color: ${props => props.textColor};
 	}
 	${props => props.hasChildren && css`
 		&:after {
@@ -44,16 +49,27 @@ const Node = styled.li `
 
 `;
 
-function SlideNodeItem(props) {
+interface IProps {
+	hasChildren: boolean,
+	textColor: string,
+	handleClick: (id: number, title: string) => void,
+	title: string,
+	url: string,
+	key: number,
+	id: number
+}
+
+
+function SlideNodeItem(props: IProps) {
 	return (
 		<Node>
 			<NodeLink
 				textColor={props.textColor}
-				hasChildren={props.item.hasOwnProperty('subnodes') ? true : false}
-				href={props.item.hasOwnProperty('subnodes') ? null : props.item.url}
-				onClick={() => props.item.hasOwnProperty('subnodes') ? props.handleClick(props.item.id, props.item.Title) : null}
+				hasChildren={props.hasChildren}
+				href={props.url}
+				onClick={() => props.hasChildren ? props.handleClick(props.id, props.title) : null}
 			>
-			{props.item.Title}
+			{props.title}
 			</NodeLink>
 		</Node>
 		)

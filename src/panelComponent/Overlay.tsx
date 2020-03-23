@@ -11,7 +11,14 @@ const fadeout = keyframes`
 	0% { opacity: 1;}
 `;
 
-const Overlay = styled.div`
+type OverlayType = {
+	fadein: boolean,
+	fadeout: boolean,
+	hide: boolean,
+	transitionDuration: string
+}
+
+const Overlay = styled.div<OverlayType>`
 	backface-visibility: hidden;
 	position: fixed;
 	z-index: 1000;
@@ -23,7 +30,7 @@ const Overlay = styled.div`
 	background: rgba(43,46,56,.9);
   ${props => props.fadein && css`
 		animation: ${fadein};
-		animation-duration: ${props => props.transitionDuration || "0.5s"};
+		animation-duration: ${props.transitionDuration};
 		animation-fill-mode: forwards;
 		animation-timing-function: ease-in;
 		animation-iteration-count: 1;
@@ -31,7 +38,7 @@ const Overlay = styled.div`
   `}
   ${props => props.fadeout && css`
 		animation: ${fadeout};
-		animation-duration: ${props => props.transitionDuration || "0.5s"};
+		animation-duration: ${props.transitionDuration};
 		animation-timing-function: ease-out;
 		animation-fill-mode: forwards;
 		animation-iteration-count: 1;
@@ -43,13 +50,22 @@ const Overlay = styled.div`
 	`}
 `;
 
-function OverlayContainer (props) {
+interface OverlayProps {
+	transitionDuration: string,
+	fadein: boolean,
+	fadeout: boolean,
+	hide: boolean,
+	handleEvent: () => void,
+	onAnimationEnd: () => void
+}
+
+function OverlayContainer (props: OverlayProps) {
 	return (
 		<Overlay
 			transitionDuration={props.transitionDuration}
 			fadein={props.fadein}
 			fadeout={props.fadeout}
-			hide={props.hideOverlay}
+			hide={props.hide}
 			onClick={props.handleEvent}
 			onAnimationEnd={props.onAnimationEnd}
 		/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, {keyframes} from 'styled-components';
+import styled from 'styled-components';
 import BreadcrumbNode from './BreadcrumbNode'
 
 const Node = styled.ul `
@@ -13,13 +13,18 @@ const Node = styled.ul `
 	padding-bottom: 20px;
 `;
 
-function Breadcrumbs(props) {
+interface BreadCrumbProps {
+	breadcrumbs: Array<any>,
+	textColor: string
+}
+
+function Breadcrumbs(props: BreadCrumbProps) {
 
 	if (props.breadcrumbs.length > 0) {
 		return (
 			<Node>
 			{props.breadcrumbs.map(data => (
-				<BreadcrumbNode key={data.id} data={data} textColor={props.textColor} />
+				<BreadcrumbNode key={data.id} id={data.id} title={data.Title} textColor={props.textColor} />
 			))}
 			</Node>
 		)

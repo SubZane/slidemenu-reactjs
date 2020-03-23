@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import styled, { keyframes, css } from 'styled-components';
+import React  from 'react'
+import styled, { keyframes } from 'styled-components';
 
 const FadeInTop = keyframes`
   0% {
@@ -56,22 +56,26 @@ const NodeItem = styled.li `
 	}
 `;
 
-const CrumbItem = styled.span `
-	color: ${props => props.textColor || "#333"};
+type CrumbType = {
+	textColor: string
+}
+
+const CrumbItem = styled.span<CrumbType>`
+	color: ${props => props.textColor};
 	display: inline-block;
 `;
 
-function BreadcrumbNode(props) {
-	const [isVisible, setIsVisible] = useState(false)
+interface BreadCrumbProps {
+	key: number,
+	id: number,
+	title: string,
+	textColor: string
+}
 
-	function onAnimationEnd() {
-		console.log('onAnimationEnd')
-		setIsVisible(true)
-	}
-
+function BreadcrumbNode(props: BreadCrumbProps) {
 	return (
-		<NodeItem visible={isVisible} key={props.data.id} textColor={props.textColor} onAnimationEnd={onAnimationEnd}>
-			<CrumbItem key={props.data.id}>{props.data.Title}</CrumbItem>
+		<NodeItem key={props.id}>
+			<CrumbItem textColor={props.textColor} key={props.id}>{props.title}</CrumbItem>
 		</NodeItem>
 	)
 }

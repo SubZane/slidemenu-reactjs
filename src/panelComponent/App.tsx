@@ -4,7 +4,9 @@ import Overlay from './Overlay'
 import PanelButton from './PanelButton'
 import Panel from './Panel'
 
-const GlobalStyle = createGlobalStyle`
+
+
+const GlobalStyle = createGlobalStyle<{visible: boolean}>`
 body {
 	${props => props.visible && css`
 		height: 100%;
@@ -24,21 +26,34 @@ html {
 }
 `
 
-function FlyPanels(props) {
-	const [togglePanel, setTogglePanel] = useState(false);
-	const [isPanelVisible, setPanelVisible] = useState(false);
-	const [hasOverlayAnimationEnded, sethasOverlayAnimationEnded] = useState(false);
-	const [hasPanelTransitionEnded, sethasPanelTransitionEnded] = useState(false);
-	const [hideOverlay, setHideOverlay] = useState(false);
-	const [fadeout, setFadeout] = useState(false);
-	const [fadein, setFadein] = useState(false);
-	const [isPanelButtonVisible, setIsPanelButtonVisible] = useState(true);
+interface FlyPanelsProps {
+	animation: string,
+	transitionDuration: string,
+	borderRadius: string,
+	customButtonReference: boolean,
+	innerPadding: string,
+	backgroundColor: string,
+	buttonPosition: string,
+	buttonBackgroundColor: string,
+	buttonColor: string,
+	children: JSX.Element[] | JSX.Element
+}
+
+function FlyPanels(props: FlyPanelsProps) {
+	const [togglePanel, setTogglePanel] = useState<boolean>(false);
+	const [isPanelVisible, setPanelVisible] = useState<boolean>(false);
+	const [hasOverlayAnimationEnded, sethasOverlayAnimationEnded] = useState<boolean>(false);
+	const [hasPanelTransitionEnded, sethasPanelTransitionEnded] = useState<boolean>(false);
+	const [hideOverlay, setHideOverlay] = useState<boolean>(false);
+	const [fadeout, setFadeout] = useState<boolean>(false);
+	const [fadein, setFadein] = useState<boolean>(false);
+	const [isPanelButtonVisible, setIsPanelButtonVisible] = useState<boolean>(true);
 
 
 	useEffect(() => {
 		if (props.customButtonReference) {
-			props.customButtonReference.current.addEventListener('click', openPanel)
-			setIsPanelButtonVisible(false)
+			//props.customButtonReference.current.addEventListener('click', openPanel)
+			//setIsPanelButtonVisible(false)
 		}
 	}, [props.customButtonReference]);
 

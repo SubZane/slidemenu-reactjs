@@ -2,7 +2,13 @@ import React from 'react';
 import styled, {css} from 'styled-components';
 import Content from './Content'
 
-const Panel = styled.div`
+type PanelType = {
+	borderRadius: string,
+	visible: boolean,
+	animation: string,
+}
+
+const Panel = styled.div<PanelType>`
 	position: fixed;
   max-width: 700px;
 	z-index: 2000;
@@ -55,8 +61,18 @@ const Panel = styled.div`
 		`}
 	}
 `
+interface PanelContainerProps {
+	borderRadius: string,
+	visible: boolean,
+	animation: string,
+	backgroundColor: string,
+	transitionDuration: string,
+	innerPadding: string,
+	onTransitionEnd: () => void,
+	children: JSX.Element[] | JSX.Element
+}
 
-function PanelContainer (props) {
+function PanelContainer (props: PanelContainerProps) {
 	return (
 		<Panel
 			borderRadius={props.borderRadius}

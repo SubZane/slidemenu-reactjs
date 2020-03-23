@@ -1,6 +1,6 @@
-import React, {} from 'react';
-import ReactDOM from 'react-dom';
-import FlyPanels from './panelComponent/App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import FlyPanels from './panelComponent/App'
 import Slidemenu from './menuComponent/App'
 
 /*
@@ -34,5 +34,6 @@ ReactDOM.render (
 		</FlyPanels>
 	</React.Fragment>
 		,
+
 	document.getElementById('root')
 );

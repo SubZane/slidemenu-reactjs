@@ -47,13 +47,21 @@ const SlideRightOut = keyframes`
 	}
 `;
 
-const Node = styled.ul `
+type NodeTypes = {
+	backgroundColor: string,
+	direction: string,
+	transitionDuration: string,
+	fade: string,
+	visible: boolean
+}
+
+const Node = styled.ul<NodeTypes> `
 	position: absolute;
 	width: 100%;
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	background: ${props => props.backgroundColor || "#F5F3F3"};
+	background: ${props => props.backgroundColor};
 	font-family: Arial, Helvetica, sans-serif;
 	backface-visibility: hidden;
 	${props => props.fade === 'out' && props.direction === 'left' && css`
@@ -69,7 +77,7 @@ const Node = styled.ul `
 		animation: ${SlideRightOut};
   `}
 	${props => props.fade !== null && css`
-		animation-duration: ${props => props.transitionDuration || "0.5s"};
+		animation-duration: ${props.transitionDuration};
 		animation-timing-function: ease-in-out;
 		animation-fill-mode:forwards;
   `}
@@ -79,7 +87,22 @@ const Node = styled.ul `
   `}
 `;
 
-function NodeElement (props) {
+interface NodeProps {
+	visible: boolean,
+	backgroundColor: string,
+	fade: string,
+	transitionDuration: string,
+	textColor: string,
+	direction: string,
+	backButtonText: string,
+	onAnimationEnd: () => void,
+	backLinkClickHandler: () => void,
+	menuClickHandler: (id: number, title: string) => void,
+	backLink: boolean,
+	menuData: Array<any>
+}
+
+function NodeElement (props: NodeProps) {
 	return (
 		<Node backgroundColor={props.backgroundColor} visible={props.visible} fade={props.fade} direction={props.direction} transitionDuration={props.transitionDuration} onAnimationEnd={props.onAnimationEnd}>
 		{props.backLink &&
@@ -88,7 +111,10 @@ function NodeElement (props) {
 		{props.menuData.map(data => (
 			<NodeItem
 				key={data.id}
-				item={data}
+				id={data.id}
+				hasChildren={data.hasOwnProperty('subnodes') ? true : false}
+				url={data.hasOwnProperty('subnodes') ? '#' : data.url}
+				title={data.Title}
 				textColor={props.textColor}
 				handleClick={props.menuClickHandler}
 			/>
