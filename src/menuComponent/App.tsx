@@ -38,10 +38,8 @@ function Slidemenu(props: SlidemenuProps) {
 	const [condition, setCondition] = useState<string>('')
 
 	const [oddFade, setOddFade] = useState<string>('')
-	const [oddDirection, setOddDirection] = useState('left')
 
 	const [evenFade, setEvenFade] = useState<string>('')
-	const [evenDirection, setEvenDirection] = useState<string>('left')
 
 	const [breadcrumbs, setBreadcrumbs] = useState<Array<any>>([])
 
@@ -56,40 +54,29 @@ function Slidemenu(props: SlidemenuProps) {
 	}
 
 	useEffect(() => {
-		// console.log('Level: ' + nodeLevel)
-		// console.log('condition: ' + condition);
-		// console.log('-----------------');
 		if (condition === 'open') {
 			if (nodeLevel % 2 === 0) {
 				setEvenNodeVisible(true)
-				setEvenDirection('left')
-				setEvenFade('in')
+				setEvenFade('in-left')
 
-				setOddDirection('left')
-				setOddFade('out')
+				setOddFade('out-left')
 			} else {
 				setOddNodeVisible(true)
-				setOddDirection('left')
-				setOddFade('in')
+				setOddFade('in-left')
 
-				setEvenDirection('left')
-				setEvenFade('out')
+				setEvenFade('out-left')
 			}
 		} else if (condition === 'close') {
 			if (nodeLevel % 2 === 0) {
 				setEvenNodeVisible(true)
-				setEvenDirection('right')
-				setEvenFade('in')
+				setEvenFade('in-right')
 
-				setOddDirection('right')
-				setOddFade('out')
+				setOddFade('out-right')
 			} else {
 				setOddNodeVisible(true)
-				setOddDirection('right')
-				setOddFade('in')
+				setOddFade('in-right')
 
-				setEvenDirection('right')
-				setEvenFade('out')
+				setEvenFade('out-right')
 			}
 		}
 	}, [nodeLevel, condition])
@@ -172,14 +159,12 @@ function Slidemenu(props: SlidemenuProps) {
 		<React.Fragment>
 			<MenuWrapper
 				backgroundColor={props.backgroundColor}
-				menuWidth={props.menuWidth}
-			>
+				menuWidth={props.menuWidth}>
 				<Breadcrumbs textColor={props.textColor} breadcrumbs={breadcrumbs} />
 
 				<Node
 					visible={isEvenNodeVisible}
 					fade={evenFade}
-					direction={evenDirection}
 					transitionDuration={props.transitionDuration}
 					onAnimationEnd={onNodeAnimationEnded}
 					menuData={evenMenuData}
@@ -195,7 +180,6 @@ function Slidemenu(props: SlidemenuProps) {
 					visible={isOddNodeVisible}
 					fade={oddFade}
 					onAnimationEnd={onNodeAnimationEnded}
-					direction={oddDirection}
 					transitionDuration={props.transitionDuration}
 					menuData={oddMenuData}
 					menuClickHandler={OpenNode}

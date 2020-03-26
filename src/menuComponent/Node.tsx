@@ -49,7 +49,6 @@ const SlideRightOut = keyframes`
 
 type NodeTypes = {
 	backgroundColor: string
-	direction: string
 	transitionDuration: string
 	fade: string
 	visible: boolean
@@ -65,26 +64,22 @@ const Node = styled.ul<NodeTypes>`
 	font-family: Arial, Helvetica, sans-serif;
 	backface-visibility: hidden;
 	${props =>
-		props.fade === 'out' &&
-		props.direction === 'left' &&
+		props.fade === 'out-left' &&
 		css`
 			animation: ${SlideLeftOut};
 		`}
 	${props =>
-		props.fade === 'in' &&
-		props.direction === 'right' &&
+		props.fade === 'in-right' &&
 		css`
 			animation: ${SlideRightIn};
 		`}
 	${props =>
-		props.fade === 'in' &&
-		props.direction === 'left' &&
+		props.fade === 'in-left' &&
 		css`
 			animation: ${SlideLeftIn};
 		`}
 	${props =>
-		props.fade === 'out' &&
-		props.direction === 'right' &&
+		props.fade === 'out-right' &&
 		css`
 			animation: ${SlideRightOut};
 		`}
@@ -109,7 +104,6 @@ interface NodeProps {
 	fade: string
 	transitionDuration: string
 	textColor: string
-	direction: string
 	backButtonText: string
 	onAnimationEnd: () => void
 	backLinkClickHandler: () => void
@@ -124,10 +118,8 @@ function NodeElement(props: NodeProps) {
 			backgroundColor={props.backgroundColor}
 			visible={props.visible}
 			fade={props.fade}
-			direction={props.direction}
 			transitionDuration={props.transitionDuration}
-			onAnimationEnd={props.onAnimationEnd}
-		>
+			onAnimationEnd={props.onAnimationEnd}>
 			{props.backLink && (
 				<NodeBackLink
 					textColor={props.textColor}

@@ -28,8 +28,8 @@ html {
 }
 `
 
-interface FlyPanelsProps {
-	animation: string
+export interface FlyPanelsProps {
+	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
 	transitionDuration: string
 	borderRadius: string
 	customButtonReference: boolean
@@ -44,23 +44,17 @@ interface FlyPanelsProps {
 function FlyPanels(props: FlyPanelsProps) {
 	const [togglePanel, setTogglePanel] = useState<boolean>(false)
 	const [isPanelVisible, setPanelVisible] = useState<boolean>(false)
-	const [hasOverlayAnimationEnded, sethasOverlayAnimationEnded] = useState<
-		boolean
-	>(false)
-	const [hasPanelTransitionEnded, sethasPanelTransitionEnded] = useState<
-		boolean
-	>(false)
+	const [hasOverlayAnimationEnded, sethasOverlayAnimationEnded] = useState<boolean>(false)
+	const [hasPanelTransitionEnded, sethasPanelTransitionEnded] = useState<boolean>(false)
 	const [hideOverlay, setHideOverlay] = useState<boolean>(false)
 	const [fadeout, setFadeout] = useState<boolean>(false)
 	const [fadein, setFadein] = useState<boolean>(false)
-	const [isPanelButtonVisible, setIsPanelButtonVisible] = useState<boolean>(
-		true
-	)
+	const [isPanelButtonVisible, setIsPanelButtonVisible] = useState<boolean>(true)
 
 	useEffect(() => {
 		if (props.customButtonReference) {
-			//props.customButtonReference.current.addEventListener('click', openPanel)
-			//setIsPanelButtonVisible(false)
+			// props.customButtonReference.addEventListener('click', openPanel)
+			// setIsPanelButtonVisible(false)
 		}
 	}, [props.customButtonReference])
 
@@ -84,13 +78,7 @@ function FlyPanels(props: FlyPanelsProps) {
 				setFadein(false)
 			}
 		}
-	}, [
-		hasOverlayAnimationEnded,
-		hasPanelTransitionEnded,
-		togglePanel,
-		isPanelVisible,
-		fadeout
-	])
+	}, [hasOverlayAnimationEnded, hasPanelTransitionEnded, togglePanel, isPanelVisible, fadeout])
 
 	function closePanel() {
 		setTogglePanel(false)
@@ -136,8 +124,7 @@ function FlyPanels(props: FlyPanelsProps) {
 					buttonBackgroundColor={props.buttonBackgroundColor}
 					buttonColor={props.buttonColor}
 					position={props.buttonPosition}
-					handleEvent={openPanel}
-				></PanelButton>
+					handleEvent={openPanel}></PanelButton>
 			)}
 		</React.Fragment>
 	)

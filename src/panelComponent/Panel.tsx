@@ -16,6 +16,17 @@ const Panel = styled.div<PanelType>`
 	visibility: hidden;
 
 	/* animation props */
+		transform: rotateX(0deg);
+	${props =>
+		props.animation === 'flip-top' &&
+		css`
+			top: 0px;
+			right: 10px;
+			left: 50px;
+			height: 400px;
+			perspective: 1300px;
+		`}
+
 	${props =>
 		props.animation === 'door-left' &&
 		css`
@@ -64,6 +75,11 @@ const Panel = styled.div<PanelType>`
 			css`
 				left: auto;
 			`}
+		${props =>
+			props.animation === 'flip-top' &&
+			css`
+				left: auto;
+			`}
     width: 30%;
 		border-radius: 0 5px;
 		${props =>
@@ -78,7 +94,7 @@ const Panel = styled.div<PanelType>`
 interface PanelContainerProps {
 	borderRadius: string
 	visible: boolean
-	animation: string
+	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
 	backgroundColor: string
 	transitionDuration: string
 	innerPadding: string
@@ -92,8 +108,7 @@ function PanelContainer(props: PanelContainerProps) {
 			borderRadius={props.borderRadius}
 			animation={props.animation}
 			visible={props.visible}
-			onTransitionEnd={props.onTransitionEnd}
-		>
+			onTransitionEnd={props.onTransitionEnd}>
 			<Content
 				innerPadding={props.innerPadding}
 				borderRadius={props.borderRadius}

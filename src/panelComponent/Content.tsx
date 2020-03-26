@@ -20,6 +20,25 @@ const Content = styled.div<ContentType>`
 	left: 0;
 	right: 0;
 
+	${props =>
+		props.animation === 'flip-top' &&
+		css`
+			border-bottom-left-radius: ${props.borderRadius};
+			border-bottom-right-radius: ${props.borderRadius};
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			top: 0;
+			right: 0;
+
+			transform-style: preserve-3d;
+			transform: translateY(-100%) rotateX(90deg);
+			transform-origin: 100% 0;
+			opacity: 0;
+			transition-timing-function: ease-out;
+			transition: all;
+			transition-duration: ${props.transitionDuration};
+		`}
+
   ${props =>
 		props.animation === 'door-left' &&
 		css`
@@ -80,6 +99,14 @@ const Content = styled.div<ContentType>`
 
 	${props =>
 		props.visible &&
+		props.animation === 'flip-top' &&
+		css`
+			transform: translateY(0%) rotateX(0deg);
+			opacity: 1;
+		`}
+
+	${props =>
+		props.visible &&
 		props.animation === 'flip-bottom' &&
 		css`
 			transform: translateY(0%) rotateX(0deg);
@@ -109,7 +136,7 @@ const Inner = styled.div<InnerType>`
 interface PanelContentProps {
 	borderRadius: string
 	visible: boolean
-	animation: string
+	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
 	backgroundColor: string
 	transitionDuration: string
 	innerPadding: string
