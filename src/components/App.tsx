@@ -12,12 +12,12 @@ const MenuWrapper = styled.div({
 	}
 })
 
-interface SlidemenuProps {
+interface iProps {
 	menuDataSource: Array<any>
 	backButtonText: string
 }
 
-function Slidemenu(props: SlidemenuProps) {
+function Slidemenu(props: iProps) {
 	const [isEvenNodeVisible, setEvenNodeVisible] = useState<boolean>(true)
 	const [isOddNodeVisible, setOddNodeVisible] = useState<boolean>(false)
 	const [showEvenBackLink, setShowEvenBackLink] = useState<boolean>(false)

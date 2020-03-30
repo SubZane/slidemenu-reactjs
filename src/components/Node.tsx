@@ -55,7 +55,7 @@ const SlideRightOut = {
 	}
 }
 
-const Node = styled.li({
+const Node = styled.ul({
 	position: 'absolute',
 	width: '100%',
 	listStyle: 'none',

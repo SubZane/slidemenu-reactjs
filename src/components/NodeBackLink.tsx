@@ -25,14 +25,14 @@ const BackLink = styled.a({
 		backgroundColor: 'rgba(220, 221, 215, 0.5)',
 		color: '#3d3b39'
 	}),
-	...pseudo('&:not([href]):hover', {
+	...pseudo(':not([href]):hover', {
 		backgroundColor: 'rgba(220, 221, 215, 0.5)',
 		color: '#3d3b39'
 	}),
-	...pseudo('&:not([href])', {
+	...pseudo(':not([href])', {
 		color: '#3d3b39'
 	}),
-	...pseudo('&:after', {
+	...pseudo(':after', {
 		right: '15px',
 		color: 'rgba(104, 104, 104, 0.5)',
 		position: 'absolute',

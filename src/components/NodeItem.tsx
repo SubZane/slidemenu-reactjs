@@ -31,17 +31,17 @@ const NodeLink = styled.a({
 		backgroundColor: 'rgba(0, 0, 0, 0.1)',
 		textDecoration: 'none'
 	}),
-	...pseudo('&:not([href]):hover', {
+	...pseudo(':not([href]):hover', {
 		color: '#3d3b39',
 		backgroundColor: 'rgba(0, 0, 0, 0.1)'
 	}),
-	...pseudo('&:not([href])', {
+	...pseudo(':not([href])', {
 		color: '#3d3b39'
 	})
 })
 
 const hasChildrenStyles = {
-	...pseudo('&:not([href])', {
+	...pseudo(':not([href])', {
 		right: '15px',
 		color: 'rgba(104, 104, 104, 0.5)',
 		position: 'absolute',
