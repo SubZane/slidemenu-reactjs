@@ -1,104 +1,129 @@
 import React from 'react'
-import { styled, keyframes, css } from './theme'
+import { styled } from './theme'
 import NodeItem from './NodeItem'
 import NodeBackLink from './NodeBackLink'
 
-const SlideLeftOut = keyframes`
-  0% {
-		transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-		transform: translateX(-100%);
-    opacity: 0;
-  }
-`
-
-const SlideRightIn = keyframes`
-	0% {
-		transform: translateX(-100%);
-		opacity: 0;
+const SlideLeftOut = {
+	animationName: {
+		'0%': {
+			transform: 'translateX(0)',
+			opacity: 1
+		},
+		'100%': {
+			transform: 'translateX(-100%)',
+			opacity: 0
+		}
 	}
-	100% {
-		transform: translateX(0px);
-		opacity: 1;
-	}
-`
-
-const SlideLeftIn = keyframes`
-	0% {
-		transform: translateX(100%);
-		opacity: 0;
-	}
-	100% {
-		transform: translateX(0px);
-		opacity: 1;
-	}
-`
-
-const SlideRightOut = keyframes`
-	0% {
-		transform: translateX(0px);
-		opacity: 1;
-	}
-	100% {
-		transform: translateX(100%);
-		opacity: 0;
-	}
-`
-
-type NodeTypes = {
-	fade: string
-	visible: boolean
 }
 
-const Node = styled.ul<NodeTypes>`
-	position: absolute;
-	width: 100%;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	background: ${props => props.theme.backgroundColor};
-	font-family: Arial, Helvetica, sans-serif;
-	backface-visibility: hidden;
-	${props =>
-		props.fade === 'out-left' &&
-		css`
-			animation: ${SlideLeftOut};
-		`}
-	${props =>
-		props.fade === 'in-right' &&
-		css`
-			animation: ${SlideRightIn};
-		`}
-	${props =>
-		props.fade === 'in-left' &&
-		css`
-			animation: ${SlideLeftIn};
-		`}
-	${props =>
-		props.fade === 'out-right' &&
-		css`
-			animation: ${SlideRightOut};
-		`}
-	${props =>
-		props.fade !== null &&
-		css`
-			animation-duration: ${props.theme.transitionDuration};
-			animation-timing-function: ease-in-out;
-			animation-fill-mode: forwards;
-		`}
-	${props =>
-		!props.visible &&
-		css`
-			opacity: 0;
-			display: none;
-		`}
-`
+const SlideRightIn = {
+	animationName: {
+		'0%': {
+			transform: 'translateX(-100%)',
+			opacity: 0
+		},
+		'100%': {
+			transform: 'translateX(0)',
+			opacity: 1
+		}
+	}
+}
+
+const SlideLeftIn = {
+	animationName: {
+		'0%': {
+			transform: 'translateX(100%)',
+			opacity: 0
+		},
+		'100%': {
+			transform: 'translateX(0)',
+			opacity: 1
+		}
+	}
+}
+
+const SlideRightOut = {
+	animationName: {
+		'0%': {
+			transform: 'translateX(0)',
+			opacity: 1
+		},
+		'100%': {
+			transform: 'translateX(100%)',
+			opacity: 0
+		}
+	}
+}
+
+const Node = styled.li({
+	position: 'absolute',
+	width: '100%',
+	listStyle: 'none',
+	font: {
+		family: 'Arial, Helvetica, sans-serif'
+	},
+	backfaceVisibility: 'hidden',
+	margin: {
+		xy: 0
+	},
+	padding: {
+		xy: 0
+	},
+	background: {
+		color: '#EAE9E3'
+	}
+})
+
+const AnimationEffects = {
+	animationFillMode: 'forwards',
+	animationDuration: '0.5s',
+	animationTimingFunction: 'ease-in-out'
+}
+
+const Visible = {
+	opacity: '0',
+	display: 'none'
+}
+
+function setStyle(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '', visible: boolean) {
+	if (fade === 'in-left') {
+		const css = { ...SlideLeftIn, ...AnimationEffects }
+		if (visible) {
+			const animatedCSS = { ...css, ...Visible }
+			return animatedCSS
+		} else {
+			return css
+		}
+	} else if (fade === 'in-right') {
+		const css = { ...SlideRightIn, ...AnimationEffects }
+		if (visible) {
+			const animatedCSS = { ...css, ...Visible }
+			return animatedCSS
+		} else {
+			return css
+		}
+	} else if (fade === 'out-left') {
+		const css = { ...SlideLeftOut, ...AnimationEffects }
+		if (visible) {
+			const animatedCSS = { ...css, ...Visible }
+			return animatedCSS
+		} else {
+			return css
+		}
+	} else if (fade === 'out-right') {
+		const css = { ...SlideRightOut, ...AnimationEffects }
+		if (visible) {
+			const animatedCSS = { ...css, ...Visible }
+			return animatedCSS
+		} else {
+			return css
+		}
+	}
+}
 
 interface NodeProps {
 	visible: boolean
-	fade: 'in-left' | 'out-left' | 'in-right' | 'out-right' | ''
+	fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | ''
 	backButtonText: string
 	onAnimationEnd: () => void
 	backLinkClickHandler: () => void
@@ -109,7 +134,7 @@ interface NodeProps {
 
 function NodeElement(props: NodeProps) {
 	return (
-		<Node visible={props.visible} fade={props.fade} onAnimationEnd={props.onAnimationEnd}>
+		<Node css={setStyle(props.fade, props.visible)} onAnimationEnd={props.onAnimationEnd}>
 			{props.backLink && (
 				<NodeBackLink backButtonText={props.backButtonText} handleClick={props.backLinkClickHandler} />
 			)}

@@ -2,16 +2,20 @@ import React from 'react'
 import { styled } from './theme'
 import BreadcrumbNode from './BreadcrumbNode'
 
-const Node = styled.ul`
-	background-color: rgba(255, 255, 255, 0.5);
-	padding-left: 36px;
-	padding-top: 25px;
-	pointer-events: none;
-	display: block;
-	margin-bottom: 0;
-	list-style: none;
-	padding-bottom: 20px;
-`
+const Node = styled.ul({
+	backgroundColor: 'rgba(255, 255, 255, 0.5)',
+	display: 'block',
+	listStyle: 'none',
+	padding: {
+		left: '36px',
+		top: '25px',
+		bottom: '20px'
+	},
+	pointerEvents: 'none',
+	margin: {
+		bottom: 0
+	}
+})
 
 interface BreadCrumbProps {
 	breadcrumbs: Array<any>

@@ -1,52 +1,59 @@
 import React from 'react'
-import { styled, css } from './theme'
+import { styled, pseudo } from './theme'
+import { Style } from '@glitz/type'
 
-type NodeTypes = {
-	hasChildren: boolean
-}
+const NodeLink = styled.a({
+	display: 'block',
+	color: '#3d3b39',
+	textDecoration: 'none',
+	font: {
+		size: '14px'
+	},
+	padding: {
+		top: '15px',
+		bottom: '15px',
+		left: '20px',
+		right: '20px'
+	},
+	lineHeight: '20px',
+	outline: {
+		style: 'none'
+	},
+	cursor: 'pointer',
+	position: 'relative',
+	borderBottom: {
+		width: '1px',
+		style: 'solid',
+		color: 'rgba(0, 0, 0, 0.1)'
+	},
+	...pseudo(':hover', {
+		color: '#3d3b39',
+		backgroundColor: 'rgba(0, 0, 0, 0.1)',
+		textDecoration: 'none'
+	}),
+	...pseudo('&:not([href]):hover', {
+		color: '#3d3b39',
+		backgroundColor: 'rgba(0, 0, 0, 0.1)'
+	}),
+	...pseudo('&:not([href])', {
+		color: '#3d3b39'
+	})
+})
 
-const NodeLink = styled.a<NodeTypes>`
-	display: block;
-	color: ${props => props.theme.color};
-	text-decoration: none;
-	font-size: 14px;
-	padding: 15px 20px;
-	line-height: 20px;
-	outline: none;
-	cursor: pointer;
-	position: relative;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-	&:hover {
-		color: ${props => props.theme.color};
-		background: rgba(0, 0, 0, 0.1);
-		text-decoration: none;
-	}
-	&:not([href]):hover {
-		background: rgba(0, 0, 0, 0.1);
-		color: ${props => props.theme.color};
-	}
-	&:not([href]) {
-		color: ${props => props.theme.color};
-	}
-	${props =>
-		props.hasChildren &&
-		css`
-			&:after {
-				right: 15px;
-				color: rgba(104, 104, 104, 0.5);
-				position: absolute;
-				top: 0;
-				line-height: 50px;
-				font-family: 'Font Awesome 5 Free';
-				font-weight: 400;
-				content: '\f04b';
-				font-size: 12px;
-				speak: none;
-			}
-		`}
-`
-
-const Node = styled.li``
+const hasChildrenStyles = {
+	...pseudo('&:not([href])', {
+		right: '15px',
+		color: 'rgba(104, 104, 104, 0.5)',
+		position: 'absolute',
+		top: 0,
+		lineHeight: '50px',
+		font: {
+			family: 'Font Awesome 5 Free',
+			size: '12px'
+		},
+		content: '\\f04b'
+	})
+} as Style
 
 interface IProps {
 	hasChildren: boolean
@@ -59,14 +66,14 @@ interface IProps {
 
 function SlideNodeItem(props: IProps) {
 	return (
-		<Node>
+		<li>
 			<NodeLink
-				hasChildren={props.hasChildren}
+				css={props.hasChildren ? hasChildrenStyles : {}}
 				href={props.url}
 				onClick={() => (props.hasChildren ? props.handleClick(props.id, props.title) : null)}>
 				{props.title}
 			</NodeLink>
-		</Node>
+		</li>
 	)
 }
 

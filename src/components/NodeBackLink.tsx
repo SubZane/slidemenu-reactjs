@@ -1,45 +1,52 @@
 import React from 'react'
-import { styled } from './theme'
+import { styled, pseudo } from './theme'
 
-const BackLink = styled.a`
-	display: block;
-	color: ${props => props.theme.color};
-	text-decoration: none;
-	font-size: 14px;
-	padding: 15px 20px;
-	line-height: 20px;
-	outline: none;
-	position: relative;
-	cursor: pointer;
-	padding-left: 35px;
-	background: rgba(220, 221, 215, 1);
-	&:after {
-		position: absolute;
-		top: 0;
-		line-height: 50px;
-		font-family: 'Font Awesome 5 Free';
-		font-weight: 400;
-		content: '\f04b';
-		font-size: 12px;
-		speak: none;
-		left: 15px;
-		color: rgba(104, 104, 104, 0.5);
-		transform: rotate(180deg);
-	}
-	&:hover {
-		background: rgba(220, 221, 215, 0.5);
-		color: ${props => props.theme.color};
-	}
-	&:not([href]):hover {
-		background: rgba(220, 221, 215, 0.5);
-		color: ${props => props.theme.color};
-	}
-	&:not([href]) {
-		color: ${props => props.theme.color};
-	}
-`
-
-const Node = styled.li``
+const BackLink = styled.a({
+	display: 'block',
+	color: '#3d3b39',
+	textDecoration: 'none',
+	font: {
+		size: '14px'
+	},
+	padding: {
+		top: '15px',
+		bottom: '15px',
+		left: '35px',
+		right: '20px'
+	},
+	lineHeight: '20px',
+	outline: {
+		style: 'none'
+	},
+	position: 'relative',
+	cursor: 'pointer',
+	backgroundColor: 'rgba(220, 221, 215, 1)',
+	...pseudo(':hover', {
+		backgroundColor: 'rgba(220, 221, 215, 0.5)',
+		color: '#3d3b39'
+	}),
+	...pseudo('&:not([href]):hover', {
+		backgroundColor: 'rgba(220, 221, 215, 0.5)',
+		color: '#3d3b39'
+	}),
+	...pseudo('&:not([href])', {
+		color: '#3d3b39'
+	}),
+	...pseudo('&:after', {
+		right: '15px',
+		color: 'rgba(104, 104, 104, 0.5)',
+		position: 'absolute',
+		top: 0,
+		lineHeight: '50px',
+		font: {
+			family: 'Font Awesome 5 Free',
+			size: '12px'
+		},
+		left: '15px',
+		content: '\\f04b',
+		transform: 'rotate(180deg)'
+	})
+})
 
 interface IProps {
 	backButtonText: string
@@ -48,9 +55,9 @@ interface IProps {
 
 function NodeBackLink(props: IProps) {
 	return (
-		<Node>
+		<li>
 			<BackLink onClick={props.handleClick}>{props.backButtonText}</BackLink>
-		</Node>
+		</li>
 	)
 }
 

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { styled } from './theme'
+import { styled, theme } from './theme'
 import { findNode } from '../helpers/helpers'
 import { treemenuObjectType, parentKeysType } from '../helpers/types'
 import Node from './Node'
 import Breadcrumbs from './Breadcrumbs'
 
-const MenuWrapper = styled.div`
-	background: ${props => props.theme.backgroundColor};
-	position: relative;
-`
+const MenuWrapper = styled.div({
+	position: 'relative',
+	background: {
+		color: theme.backgroundColor
+	}
+})
 
 interface SlidemenuProps {
 	menuDataSource: Array<any>

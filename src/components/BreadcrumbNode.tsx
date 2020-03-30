@@ -1,65 +1,65 @@
 import React from 'react'
-import { styled, keyframes } from './theme'
+import { styled, pseudo } from './theme'
 
-const FadeInTop = keyframes`
-  0% {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`
+const NodeItem = styled.li({
+	font: {
+		size: '14px',
+		weight: 400
+	},
+	margin: {
+		bottom: '8px'
+	},
+	whiteSpace: 'nowrap',
+	...pseudo(':after', {
+		content: '',
+		position: 'absolute',
+		left: '12px',
+		width: '12px',
+		height: '12px',
+		borderRadius: '50%',
+		backgroundColor: '#f4f4f1',
+		border: {
+			xy: {
+				style: 'solid',
+				width: '2px',
+				color: '#d2d1cb'
+			}
+		},
+		transform: 'translateY(6px)'
+	}),
+	...pseudo(':first-child', {
+		font: {
+			size: '15px',
+			weight: 600
+		},
+		...pseudo(':after', {
+			backgroundColor: '#f4f4f1',
+			border: {
+				xy: {
+					style: 'none'
+				}
+			}
+		})
+	}),
+	...pseudo(':not(:last-child)', {
+		...pseudo(':before', {
+			content: '',
+			position: 'absolute',
+			left: '17px',
+			margin: {
+				top: '10px'
+			},
+			width: '2px',
+			height: '35px',
+			backgroundColor: '#d2d1cb'
+		})
+	})
+})
 
-const NodeItem = styled.li`
-	font-size: 14px;
-	font-weight: 400;
-	margin-bottom: 8px;
-	white-space: nowrap;
-	/*
-	animation: ${FadeInTop};
-	animation-duration: 0.3s;
-	animation-timing-function: ease-in-out;
-	backface-visibility: hidden;
-	*/
-	&:after {
-		content: '';
-		position: absolute;
-		left: 12px;
-		width: 12px;
-		height: 12px;
-		border-radius: 50%;
-		background: #F4F4F1;
-		border: 2px solid #D2D1CB;
-		transform: translateY(6px);
-	}
-	&:first-child {
-		font-weight: 600;
-		font-size: 15px;
-		&:after {
-			background: #EC7574;
-			border: 2px solid #EC7574;
-			border: none;
-		}
-	}
-	&:not(:last-child) {
-		&:before {
-			content: '';
-			position: absolute;
-			left: 17px;
-			margin-top: 10px;
-			width: 2px;
-			height: 35px;
-			background: #D2D1CB;
-		}
-	}
-`
-
-const CrumbItem = styled.span`
-	color: ${props => props.theme.color};
-	display: inline-block;
-`
+const CrumbItem = styled.span({
+	display: 'inline-block',
+	color: '#3d3b39'
+})
 
 interface BreadCrumbProps {
 	key: number

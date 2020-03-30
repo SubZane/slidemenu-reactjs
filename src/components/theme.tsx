@@ -1,20 +1,5 @@
-import * as styledComponents from 'styled-components'
-
-const {
-	default: styled,
-	css,
-	createGlobalStyle,
-	keyframes,
-	ThemeProvider
-} = styledComponents as styledComponents.ThemedStyledComponentsModule<IThemeInterface>
-
-export interface IThemeInterface {
-	backgroundColor: string
-	borderRadius: string
-	width: string
-	transitionDuration: string
-	color: string
-}
+import { styled as GlitzStyled } from '@glitz/react'
+import { pseudo as GlitzPseudo } from '@glitz/core'
 
 export const theme = {
 	backgroundColor: '#EAE9E3',
@@ -24,5 +9,5 @@ export const theme = {
 	color: '#3D3B39'
 }
 
-export default styled
-export { styled, css, createGlobalStyle, keyframes, ThemeProvider }
+export const styled = GlitzStyled
+export const pseudo = GlitzPseudo
