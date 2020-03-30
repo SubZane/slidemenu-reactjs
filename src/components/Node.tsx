@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import { styled, keyframes, css } from './theme'
 import NodeItem from './NodeItem'
 import NodeBackLink from './NodeBackLink'
 
@@ -48,8 +48,6 @@ const SlideRightOut = keyframes`
 `
 
 type NodeTypes = {
-	backgroundColor: string
-	transitionDuration: string
 	fade: string
 	visible: boolean
 }
@@ -60,7 +58,7 @@ const Node = styled.ul<NodeTypes>`
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	background: ${props => props.backgroundColor};
+	background: ${props => props.theme.backgroundColor};
 	font-family: Arial, Helvetica, sans-serif;
 	backface-visibility: hidden;
 	${props =>
@@ -86,7 +84,7 @@ const Node = styled.ul<NodeTypes>`
 	${props =>
 		props.fade !== null &&
 		css`
-			animation-duration: ${props.transitionDuration};
+			animation-duration: ${props.theme.transitionDuration};
 			animation-timing-function: ease-in-out;
 			animation-fill-mode: forwards;
 		`}
@@ -100,10 +98,7 @@ const Node = styled.ul<NodeTypes>`
 
 interface NodeProps {
 	visible: boolean
-	backgroundColor: string
-	fade: string
-	transitionDuration: string
-	textColor: string
+	fade: 'in-left' | 'out-left' | 'in-right' | 'out-right' | ''
 	backButtonText: string
 	onAnimationEnd: () => void
 	backLinkClickHandler: () => void
@@ -114,18 +109,9 @@ interface NodeProps {
 
 function NodeElement(props: NodeProps) {
 	return (
-		<Node
-			backgroundColor={props.backgroundColor}
-			visible={props.visible}
-			fade={props.fade}
-			transitionDuration={props.transitionDuration}
-			onAnimationEnd={props.onAnimationEnd}>
+		<Node visible={props.visible} fade={props.fade} onAnimationEnd={props.onAnimationEnd}>
 			{props.backLink && (
-				<NodeBackLink
-					textColor={props.textColor}
-					backButtonText={props.backButtonText}
-					handleClick={props.backLinkClickHandler}
-				/>
+				<NodeBackLink backButtonText={props.backButtonText} handleClick={props.backLinkClickHandler} />
 			)}
 			{props.menuData.map(data => (
 				<NodeItem
@@ -134,7 +120,6 @@ function NodeElement(props: NodeProps) {
 					hasChildren={data.hasOwnProperty('subnodes') ? true : false}
 					url={data.hasOwnProperty('subnodes') ? '#' : data.url}
 					title={data.Title}
-					textColor={props.textColor}
 					handleClick={props.menuClickHandler}
 				/>
 			))}

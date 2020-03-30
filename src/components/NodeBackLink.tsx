@@ -1,13 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import { styled } from './theme'
 
-type BackLinkTypes = {
-	textColor: string
-}
-
-const BackLink = styled.a<BackLinkTypes>`
+const BackLink = styled.a`
 	display: block;
-	color: ${props => props.textColor};
+	color: ${props => props.theme.color};
 	text-decoration: none;
 	font-size: 14px;
 	padding: 15px 20px;
@@ -32,21 +28,20 @@ const BackLink = styled.a<BackLinkTypes>`
 	}
 	&:hover {
 		background: rgba(220, 221, 215, 0.5);
-		color: ${props => props.textColor};
+		color: ${props => props.theme.color};
 	}
 	&:not([href]):hover {
 		background: rgba(220, 221, 215, 0.5);
-		color: ${props => props.textColor};
+		color: ${props => props.theme.color};
 	}
 	&:not([href]) {
-		color: ${props => props.textColor};
+		color: ${props => props.theme.color};
 	}
 `
 
 const Node = styled.li``
 
 interface IProps {
-	textColor: string
 	backButtonText: string
 	handleClick: () => void
 }
@@ -54,9 +49,7 @@ interface IProps {
 function NodeBackLink(props: IProps) {
 	return (
 		<Node>
-			<BackLink textColor={props.textColor} onClick={props.handleClick}>
-				{props.backButtonText}
-			</BackLink>
+			<BackLink onClick={props.handleClick}>{props.backButtonText}</BackLink>
 		</Node>
 	)
 }

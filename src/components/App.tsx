@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import { styled } from './theme'
 import { findNode } from '../helpers/helpers'
+import { treemenuObjectType, parentKeysType } from '../helpers/types'
 import Node from './Node'
 import Breadcrumbs from './Breadcrumbs'
 
-type MenuWrapperType = {
-	backgroundColor: string
-	menuWidth: string
-}
-
-const MenuWrapper = styled.div<MenuWrapperType>`
-	background: ${props => props.backgroundColor};
+const MenuWrapper = styled.div`
+	background: ${props => props.theme.backgroundColor};
 	position: relative;
 `
 
 interface SlidemenuProps {
-	backgroundColor: string
-	textColor: string
-	menuWidth: string
-	transitionDuration: string
 	menuDataSource: Array<any>
 	backButtonText: string
 }
@@ -29,19 +21,17 @@ function Slidemenu(props: SlidemenuProps) {
 	const [showEvenBackLink, setShowEvenBackLink] = useState<boolean>(false)
 	const [showOddBackLink, setShowOddBackLink] = useState<boolean>(false)
 
-	const [menuData, loadMenuData] = useState<Array<any>>([])
-	const [evenMenuData, setEvenMenuData] = useState<Array<any>>([])
-	const [oddMenuData, setOddMenuData] = useState<Array<any>>([])
+	const [menuData, loadMenuData] = useState<Array<treemenuObjectType>>([])
+	const [evenMenuData, setEvenMenuData] = useState<Array<treemenuObjectType | any>>([])
+	const [oddMenuData, setOddMenuData] = useState<Array<treemenuObjectType | any>>([])
 
 	const [nodeLevel, setNodeLevel] = useState<number>(0)
-	const [parentKeys, setParentKeys] = useState<Array<any>>([])
-	const [condition, setCondition] = useState<string>('')
+	const [parentKeys, setParentKeys] = useState<Array<parentKeysType>>([])
+	const [condition, setCondition] = useState<'open' | 'close' | ''>('')
 
-	const [oddFade, setOddFade] = useState<string>('')
-
-	const [evenFade, setEvenFade] = useState<string>('')
-
-	const [breadcrumbs, setBreadcrumbs] = useState<Array<any>>([])
+	const [oddFade, setOddFade] = useState<'in-left' | 'out-left' | 'in-right' | 'out-right' | ''>('')
+	const [evenFade, setEvenFade] = useState<'in-left' | 'out-left' | 'in-right' | 'out-right' | ''>('')
+	const [breadcrumbs, setBreadcrumbs] = useState<Array<parentKeysType>>([])
 
 	useEffect(() => {
 		loadMenuData(props.menuDataSource)
@@ -157,22 +147,17 @@ function Slidemenu(props: SlidemenuProps) {
 
 	return (
 		<React.Fragment>
-			<MenuWrapper
-				backgroundColor={props.backgroundColor}
-				menuWidth={props.menuWidth}>
-				<Breadcrumbs textColor={props.textColor} breadcrumbs={breadcrumbs} />
+			<MenuWrapper>
+				<Breadcrumbs breadcrumbs={breadcrumbs} />
 
 				<Node
 					visible={isEvenNodeVisible}
 					fade={evenFade}
-					transitionDuration={props.transitionDuration}
 					onAnimationEnd={onNodeAnimationEnded}
 					menuData={evenMenuData}
 					menuClickHandler={OpenNode}
 					backLink={showEvenBackLink}
 					backLinkClickHandler={CloseNode}
-					backgroundColor={props.backgroundColor}
-					textColor={props.textColor}
 					backButtonText={props.backButtonText}
 				/>
 
@@ -180,13 +165,10 @@ function Slidemenu(props: SlidemenuProps) {
 					visible={isOddNodeVisible}
 					fade={oddFade}
 					onAnimationEnd={onNodeAnimationEnded}
-					transitionDuration={props.transitionDuration}
 					menuData={oddMenuData}
 					menuClickHandler={OpenNode}
 					backLink={showOddBackLink}
 					backLinkClickHandler={CloseNode}
-					backgroundColor={props.backgroundColor}
-					textColor={props.textColor}
 					backButtonText={props.backButtonText}
 				/>
 			</MenuWrapper>

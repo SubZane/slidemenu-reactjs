@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import { styled } from './theme'
 import BreadcrumbNode from './BreadcrumbNode'
 
 const Node = styled.ul`
@@ -15,7 +15,6 @@ const Node = styled.ul`
 
 interface BreadCrumbProps {
 	breadcrumbs: Array<any>
-	textColor: string
 }
 
 function Breadcrumbs(props: BreadCrumbProps) {
@@ -23,12 +22,7 @@ function Breadcrumbs(props: BreadCrumbProps) {
 		return (
 			<Node>
 				{props.breadcrumbs.map(data => (
-					<BreadcrumbNode
-						key={data.id}
-						id={data.id}
-						title={data.Title}
-						textColor={props.textColor}
-					/>
+					<BreadcrumbNode key={data.id} id={data.id} title={data.Title} />
 				))}
 			</Node>
 		)

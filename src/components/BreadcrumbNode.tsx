@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import { styled, keyframes } from './theme'
 
 const FadeInTop = keyframes`
   0% {
@@ -56,12 +56,8 @@ const NodeItem = styled.li`
 	}
 `
 
-type CrumbType = {
-	textColor: string
-}
-
-const CrumbItem = styled.span<CrumbType>`
-	color: ${props => props.textColor};
+const CrumbItem = styled.span`
+	color: ${props => props.theme.color};
 	display: inline-block;
 `
 
@@ -69,15 +65,12 @@ interface BreadCrumbProps {
 	key: number
 	id: number
 	title: string
-	textColor: string
 }
 
 function BreadcrumbNode(props: BreadCrumbProps) {
 	return (
 		<NodeItem key={props.id}>
-			<CrumbItem textColor={props.textColor} key={props.id}>
-				{props.title}
-			</CrumbItem>
+			<CrumbItem key={props.id}>{props.title}</CrumbItem>
 		</NodeItem>
 	)
 }
