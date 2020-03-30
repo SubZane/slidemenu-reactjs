@@ -80,44 +80,43 @@ const AnimationEffects = {
 	animationTimingFunction: 'ease-in-out'
 }
 
-const Visible = {
+const Hide = {
 	opacity: '0',
 	display: 'none'
 }
 
 function setStyle(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '', visible: boolean) {
+	console.log('fade: ' + fade + ' | visible: ', visible)
 	if (fade === 'in-left') {
 		const css = { ...SlideLeftIn, ...AnimationEffects }
 		if (visible) {
-			const animatedCSS = { ...css, ...Visible }
-			return animatedCSS
-		} else {
 			return css
+		} else {
+			return { ...css, ...Hide }
 		}
 	} else if (fade === 'in-right') {
 		const css = { ...SlideRightIn, ...AnimationEffects }
 		if (visible) {
-			const animatedCSS = { ...css, ...Visible }
-			return animatedCSS
-		} else {
 			return css
+		} else {
+			return { ...css, ...Hide }
 		}
 	} else if (fade === 'out-left') {
 		const css = { ...SlideLeftOut, ...AnimationEffects }
 		if (visible) {
-			const animatedCSS = { ...css, ...Visible }
-			return animatedCSS
-		} else {
 			return css
+		} else {
+			return { ...css, ...Hide }
 		}
 	} else if (fade === 'out-right') {
 		const css = { ...SlideRightOut, ...AnimationEffects }
 		if (visible) {
-			const animatedCSS = { ...css, ...Visible }
-			return animatedCSS
-		} else {
 			return css
+		} else {
+			return { ...css, ...Hide }
 		}
+	} else {
+		return {}
 	}
 }
 

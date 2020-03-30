@@ -39,11 +39,11 @@ const BackLink = styled.a({
 		top: 0,
 		lineHeight: '50px',
 		font: {
-			family: 'Font Awesome 5 Free',
+			family: '"Font Awesome 5 Free"',
 			size: '12px'
 		},
 		left: '15px',
-		content: '\\f04b',
+		content: '"\\f04b"',
 		transform: 'rotate(180deg)'
 	})
 })

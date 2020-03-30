@@ -41,17 +41,17 @@ const NodeLink = styled.a({
 })
 
 const hasChildrenStyles = {
-	...pseudo(':not([href])', {
+	...pseudo(':after', {
 		right: '15px',
 		color: 'rgba(104, 104, 104, 0.5)',
 		position: 'absolute',
 		top: 0,
 		lineHeight: '50px',
 		font: {
-			family: 'Font Awesome 5 Free',
+			family: '"Font Awesome 5 Free"',
 			size: '12px'
 		},
-		content: '\\f04b'
+		content: '"\\f04b"'
 	})
 } as Style
 
