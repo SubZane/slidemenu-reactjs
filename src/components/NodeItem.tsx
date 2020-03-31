@@ -42,16 +42,18 @@ const NodeLink = styled.a({
 
 const hasChildrenStyles = {
 	...pseudo(':after', {
-		right: '15px',
-		color: 'rgba(104, 104, 104, 0.5)',
+		right: '10px',
 		position: 'absolute',
-		top: 0,
-		lineHeight: '50px',
-		font: {
-			family: '"Font Awesome 5 Free"',
-			size: '12px'
+		background: {
+			image: 'url("img/arrow-right.svg")',
+			repeat: 'no-repeat',
+			position: 'fixed'
 		},
-		content: '"\\f04b"'
+		width: '12px',
+		height: '12px',
+		top: '18px',
+		content: '""',
+		display: 'inline-block'
 	})
 } as Style
 

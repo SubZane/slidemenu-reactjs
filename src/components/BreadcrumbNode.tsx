@@ -33,7 +33,8 @@ const NodeItem = styled.li({
 			weight: 600
 		},
 		...pseudo(':after', {
-			backgroundColor: '#f4f4f1',
+			// Root dot
+			backgroundColor: '#EC7574',
 			border: {
 				xy: {
 					style: 'none'
@@ -43,6 +44,7 @@ const NodeItem = styled.li({
 	}),
 	...pseudo(':not(:last-child)', {
 		...pseudo(':before', {
+			// Vertical Line
 			content: '""',
 			position: 'absolute',
 			left: '17px',

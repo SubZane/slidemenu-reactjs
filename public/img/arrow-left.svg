@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="12px" viewBox="0 0 10 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>Triangle</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-14.000000, -149.000000)" fill="#A8A8A5">
+            <polygon id="Triangle" transform="translate(19.000000, 155.000000) rotate(-90.000000) translate(-19.000000, -155.000000) " points="19 150 25 160 13 160"></polygon>
+        </g>
+    </g>
+</svg>

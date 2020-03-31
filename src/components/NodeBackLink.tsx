@@ -36,15 +36,18 @@ const BackLink = styled.a({
 		right: '15px',
 		color: 'rgba(104, 104, 104, 0.5)',
 		position: 'absolute',
-		top: 0,
-		lineHeight: '50px',
-		font: {
-			family: '"Font Awesome 5 Free"',
-			size: '12px'
-		},
 		left: '15px',
-		content: '"\\f04b"',
-		transform: 'rotate(180deg)'
+		transform: 'rotate(180deg)',
+		background: {
+			image: 'url("img/arrow-right.svg")',
+			repeat: 'no-repeat',
+			position: 'fixed'
+		},
+		width: '12px',
+		height: '12px',
+		top: '18px',
+		content: '""',
+		display: 'inline-block'
 	})
 })
 
