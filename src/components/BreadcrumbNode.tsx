@@ -11,7 +11,7 @@ const NodeItem = styled.li({
 	},
 	whiteSpace: 'nowrap',
 	...pseudo(':after', {
-		content: 'none',
+		content: '""',
 		position: 'absolute',
 		left: '12px',
 		width: '12px',
@@ -43,7 +43,7 @@ const NodeItem = styled.li({
 	}),
 	...pseudo(':not(:last-child)', {
 		...pseudo(':before', {
-			content: 'none',
+			content: '""',
 			position: 'absolute',
 			left: '17px',
 			margin: {

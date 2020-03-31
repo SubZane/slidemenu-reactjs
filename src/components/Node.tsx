@@ -85,38 +85,27 @@ const Hide = {
 	display: 'none'
 }
 
-function setStyle(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '', visible: boolean) {
-	console.log('fade: ' + fade + ' | visible: ', visible)
+function getFadeAnimationStyles(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '') {
 	if (fade === 'in-left') {
-		const css = { ...SlideLeftIn, ...AnimationEffects }
-		if (visible) {
-			return css
-		} else {
-			return { ...css, ...Hide }
-		}
+		return { ...SlideLeftIn, ...AnimationEffects }
 	} else if (fade === 'in-right') {
-		const css = { ...SlideRightIn, ...AnimationEffects }
-		if (visible) {
-			return css
-		} else {
-			return { ...css, ...Hide }
-		}
+		return { ...SlideRightIn, ...AnimationEffects }
 	} else if (fade === 'out-left') {
-		const css = { ...SlideLeftOut, ...AnimationEffects }
-		if (visible) {
-			return css
-		} else {
-			return { ...css, ...Hide }
-		}
+		return { ...SlideLeftOut, ...AnimationEffects }
 	} else if (fade === 'out-right') {
-		const css = { ...SlideRightOut, ...AnimationEffects }
-		if (visible) {
-			return css
-		} else {
-			return { ...css, ...Hide }
-		}
+		return { ...SlideRightOut, ...AnimationEffects }
 	} else {
 		return {}
+	}
+}
+
+function setStyle(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '', visible: boolean) {
+	const css = getFadeAnimationStyles(fade)
+
+	if (visible) {
+		return css
+	} else {
+		return { ...css, ...Hide }
 	}
 }
 
