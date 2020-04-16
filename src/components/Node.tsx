@@ -2,57 +2,58 @@ import React from 'react'
 import { styled } from './theme'
 import NodeItem from './NodeItem'
 import NodeBackLink from './NodeBackLink'
+import { treemenuObjectType } from '../helpers/types'
 
 const SlideLeftOut = {
 	animationName: {
 		'0%': {
 			transform: 'translateX(0)',
-			opacity: 1
+			opacity: 1,
 		},
 		'100%': {
 			transform: 'translateX(-100%)',
-			opacity: 0
-		}
-	}
+			opacity: 0,
+		},
+	},
 }
 
 const SlideRightIn = {
 	animationName: {
 		'0%': {
 			transform: 'translateX(-100%)',
-			opacity: 0
+			opacity: 0,
 		},
 		'100%': {
 			transform: 'translateX(0)',
-			opacity: 1
-		}
-	}
+			opacity: 1,
+		},
+	},
 }
 
 const SlideLeftIn = {
 	animationName: {
 		'0%': {
 			transform: 'translateX(100%)',
-			opacity: 0
+			opacity: 0,
 		},
 		'100%': {
 			transform: 'translateX(0)',
-			opacity: 1
-		}
-	}
+			opacity: 1,
+		},
+	},
 }
 
 const SlideRightOut = {
 	animationName: {
 		'0%': {
 			transform: 'translateX(0)',
-			opacity: 1
+			opacity: 1,
 		},
 		'100%': {
 			transform: 'translateX(100%)',
-			opacity: 0
-		}
-	}
+			opacity: 0,
+		},
+	},
 }
 
 const Node = styled.ul({
@@ -60,29 +61,29 @@ const Node = styled.ul({
 	width: '100%',
 	listStyle: 'none',
 	font: {
-		family: 'Arial, Helvetica, sans-serif'
+		family: 'Arial, Helvetica, sans-serif',
 	},
 	backfaceVisibility: 'hidden',
 	margin: {
-		xy: 0
+		xy: 0,
 	},
 	padding: {
-		xy: 0
+		xy: 0,
 	},
 	background: {
-		color: '#EAE9E3'
-	}
+		color: '#EAE9E3',
+	},
 })
 
 const AnimationEffects = {
 	animationFillMode: 'forwards',
 	animationDuration: '0.5s',
-	animationTimingFunction: 'ease-in-out'
+	animationTimingFunction: 'ease-in-out',
 }
 
 const Hide = {
 	opacity: '0',
-	display: 'none'
+	display: 'none',
 }
 
 function getFadeAnimationStyles(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '') {
@@ -117,7 +118,7 @@ interface NodeProps {
 	backLinkClickHandler: () => void
 	menuClickHandler: (id: number, title: string) => void
 	backLink: boolean
-	menuData: Array<any>
+	menuData: treemenuObjectType[]
 }
 
 function NodeElement(props: NodeProps) {
@@ -126,13 +127,13 @@ function NodeElement(props: NodeProps) {
 			{props.backLink && (
 				<NodeBackLink backButtonText={props.backButtonText} handleClick={props.backLinkClickHandler} />
 			)}
-			{props.menuData.map(data => (
+			{props.menuData.map((data) => (
 				<NodeItem
 					key={data.id}
 					id={data.id}
-					hasChildren={data.hasOwnProperty('subnodes') ? true : false}
-					url={data.hasOwnProperty('subnodes') ? '#' : data.url}
-					title={data.Title}
+					hasChildren={data.subLinks.length > 0 ? true : false}
+					url={data.subLinks.length > 0 ? '#' : data.href}
+					title={data.text}
 					handleClick={props.menuClickHandler}
 				/>
 			))}

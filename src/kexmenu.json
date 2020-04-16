@@ -1,0 +1,67 @@
+{
+	"links": [
+		{
+			"href": "/en/segment/",
+			"text": "Segment",
+			"iteration": 0,
+			"id": 22,
+			"linkId": "0_22",
+			"subLinks": [
+				{
+					"href": "/en/webchannel/headphones/",
+					"text": "Products",
+					"iteration": 2,
+					"id": 1073741828,
+					"linkId": "2_1073741828",
+					"subLinks": [],
+					"isRootCategoryPage": true,
+					"active": false
+				},
+				{
+					"href": "/en/segment/test/",
+					"text": "Test",
+					"iteration": 2,
+					"id": 49,
+					"linkId": "2_49",
+					"subLinks": [],
+					"isRootCategoryPage": false,
+					"active": false
+				},
+				{
+					"href": "/en/segment/standard-page/",
+					"text": "standard page",
+					"iteration": 2,
+					"id": 8,
+					"linkId": "2_8",
+					"subLinks": [
+						{
+							"href": "/en/segment/standard-page/test-tee/",
+							"text": "test tee",
+							"iteration": 3,
+							"id": 18,
+							"linkId": "3_18",
+							"subLinks": [
+								{
+									"href": "/en/segment/standard-page/test-tee/new-page/",
+									"text": "New Page",
+									"iteration": 4,
+									"id": 19,
+									"linkId": "4_19",
+									"subLinks": [],
+									"isRootCategoryPage": false,
+									"active": false
+								}
+							],
+							"isRootCategoryPage": false,
+							"active": false
+						}
+					],
+					"isRootCategoryPage": false,
+					"active": false
+				}
+			],
+			"isRootCategoryPage": false,
+			"active": false
+		}
+	]
+}

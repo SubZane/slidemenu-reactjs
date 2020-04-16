@@ -6,31 +6,31 @@ const BackLink = styled.a({
 	color: '#3d3b39',
 	textDecoration: 'none',
 	font: {
-		size: '14px'
+		size: '14px',
 	},
 	padding: {
 		top: '15px',
 		bottom: '15px',
 		left: '35px',
-		right: '20px'
+		right: '20px',
 	},
 	lineHeight: '20px',
 	outline: {
-		style: 'none'
+		style: 'none',
 	},
 	position: 'relative',
 	cursor: 'pointer',
 	backgroundColor: 'rgba(220, 221, 215, 1)',
 	...pseudo(':hover', {
 		backgroundColor: 'rgba(220, 221, 215, 0.5)',
-		color: '#3d3b39'
+		color: '#3d3b39',
 	}),
 	...pseudo(':not([href]):hover', {
 		backgroundColor: 'rgba(220, 221, 215, 0.5)',
-		color: '#3d3b39'
+		color: '#3d3b39',
 	}),
 	...pseudo(':not([href])', {
-		color: '#3d3b39'
+		color: '#3d3b39',
 	}),
 	...pseudo(':after', {
 		right: '15px',
@@ -41,14 +41,13 @@ const BackLink = styled.a({
 		background: {
 			image: 'url("img/arrow-right.svg")',
 			repeat: 'no-repeat',
-			position: 'fixed'
 		},
 		width: '12px',
 		height: '12px',
 		top: '18px',
 		content: '""',
-		display: 'inline-block'
-	})
+		display: 'inline-block',
+	}),
 })
 
 interface IProps {

@@ -8,12 +8,12 @@ import Breadcrumbs from './Breadcrumbs'
 const MenuWrapper = styled.div({
 	position: 'relative',
 	background: {
-		color: theme.backgroundColor
-	}
+		color: theme.backgroundColor,
+	},
 })
 
 interface iProps {
-	menuDataSource: Array<any>
+	menuDataSource: treemenuObjectType[]
 	backButtonText: string
 }
 
@@ -23,9 +23,9 @@ function Slidemenu(props: iProps) {
 	const [showEvenBackLink, setShowEvenBackLink] = useState<boolean>(false)
 	const [showOddBackLink, setShowOddBackLink] = useState<boolean>(false)
 
-	const [menuData, loadMenuData] = useState<Array<treemenuObjectType>>([])
-	const [evenMenuData, setEvenMenuData] = useState<Array<treemenuObjectType | any>>([])
-	const [oddMenuData, setOddMenuData] = useState<Array<treemenuObjectType | any>>([])
+	const [menuData, loadMenuData] = useState<treemenuObjectType[] | []>([])
+	const [evenMenuData, setEvenMenuData] = useState<treemenuObjectType[] | []>([])
+	const [oddMenuData, setOddMenuData] = useState<treemenuObjectType[] | []>([])
 
 	const [nodeLevel, setNodeLevel] = useState<number>(0)
 	const [parentKeys, setParentKeys] = useState<Array<parentKeysType>>([])
@@ -89,19 +89,25 @@ function Slidemenu(props: iProps) {
 		const parent = {
 			id: id,
 			Title: title,
-			nodeLevel: nodeLevel + 1
+			nodeLevel: nodeLevel + 1,
 		}
-		setParentKeys(prevArray => [...prevArray, parent])
+		setParentKeys((prevArray) => [...prevArray, parent])
 
 		if (nodeLevel % 2 === 0) {
-			const obj = evenMenuData.filter(p => p.id === id)
+			const obj = evenMenuData.filter((p) => p.id === id)
 			if (obj.length > 0) {
-				setOddMenuData(obj.shift().subnodes)
+				const firstItem = obj.shift()
+				if (firstItem !== undefined) {
+					setOddMenuData(firstItem.subLinks)
+				}
 			}
 		} else {
-			const obj = oddMenuData.filter(p => p.id === id)
+			const obj = oddMenuData.filter((p) => p.id === id)
 			if (obj.length > 0) {
-				setEvenMenuData(obj.shift().subnodes)
+				const firstItem = obj.shift()
+				if (firstItem !== undefined) {
+					setEvenMenuData(firstItem.subLinks)
+				}
 			}
 		}
 	}
@@ -114,17 +120,18 @@ function Slidemenu(props: iProps) {
 		setCondition('close')
 		setNodeLevel(nodeLevel - 1)
 
-		setParentKeys(prevKeys => prevKeys.splice(0, prevKeys.length - 1))
+		setParentKeys((prevKeys) => prevKeys.splice(0, prevKeys.length - 1))
 
 		if (parentKeys.length > 1) {
 			const parentNode = parentKeys[parentKeys.length - 2]
 			const obj = findNode(menuData, parentNode.id)
-			const menuitems = obj[0].subnodes
-
-			if (nodeLevel % 2 === 0) {
-				setOddMenuData(menuitems)
-			} else {
-				setEvenMenuData(menuitems)
+			if (obj !== null) {
+				const menuitems = obj[0].subLinks
+				if (nodeLevel % 2 === 0) {
+					setOddMenuData(menuitems)
+				} else {
+					setEvenMenuData(menuitems)
+				}
 			}
 		} else {
 			if (nodeLevel % 2 === 0) {

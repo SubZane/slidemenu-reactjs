@@ -7,37 +7,37 @@ const NodeLink = styled.a({
 	color: '#3d3b39',
 	textDecoration: 'none',
 	font: {
-		size: '14px'
+		size: '14px',
 	},
 	padding: {
 		top: '15px',
 		bottom: '15px',
 		left: '20px',
-		right: '20px'
+		right: '20px',
 	},
 	lineHeight: '20px',
 	outline: {
-		style: 'none'
+		style: 'none',
 	},
 	cursor: 'pointer',
 	position: 'relative',
 	borderBottom: {
 		width: '1px',
 		style: 'solid',
-		color: 'rgba(0, 0, 0, 0.1)'
+		color: 'rgba(0, 0, 0, 0.1)',
 	},
 	...pseudo(':hover', {
 		color: '#3d3b39',
 		backgroundColor: 'rgba(0, 0, 0, 0.1)',
-		textDecoration: 'none'
+		textDecoration: 'none',
 	}),
 	...pseudo(':not([href]):hover', {
 		color: '#3d3b39',
-		backgroundColor: 'rgba(0, 0, 0, 0.1)'
+		backgroundColor: 'rgba(0, 0, 0, 0.1)',
 	}),
 	...pseudo(':not([href])', {
-		color: '#3d3b39'
-	})
+		color: '#3d3b39',
+	}),
 })
 
 const hasChildrenStyles = {
@@ -47,14 +47,13 @@ const hasChildrenStyles = {
 		background: {
 			image: 'url("img/arrow-right.svg")',
 			repeat: 'no-repeat',
-			position: 'fixed'
 		},
 		width: '12px',
 		height: '12px',
 		top: '18px',
 		content: '""',
-		display: 'inline-block'
-	})
+		display: 'inline-block',
+	}),
 } as Style
 
 interface IProps {

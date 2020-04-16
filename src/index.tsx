@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Slidemenu from './components/App'
-import menudataJSON from './menudata.json'
+import menudataJSON from './kexmenu.json'
 
 import { GlitzClient } from '@glitz/core'
 import { GlitzProvider } from '@glitz/react'
@@ -11,7 +11,7 @@ const glitz = new GlitzClient({ transformer: transformers() })
 
 ReactDOM.render(
 	<GlitzProvider glitz={glitz}>
-		<Slidemenu menuDataSource={menudataJSON.treemenu} backButtonText={'Go back'} />
+		<Slidemenu menuDataSource={menudataJSON.links} backButtonText={'Go back'} />
 	</GlitzProvider>,
 	document.getElementById('root')
 )
