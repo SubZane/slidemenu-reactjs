@@ -20,6 +20,17 @@ export type treemenuObjectType = {
 	active: boolean
 }
 
+export type ParentNode = {
+	href: string
+	text: string
+	iteration: number
+	id: number
+	linkId: string
+	isRootCategoryPage: boolean
+	active: boolean
+	nodeLevel: number
+}
+
 export type parentKeysType = {
 	id: number
 	Title: string

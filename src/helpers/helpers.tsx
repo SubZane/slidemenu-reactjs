@@ -17,3 +17,8 @@ export function findNode(object: treemenuObjectType[], id: number): treemenuObje
 	}
 	return null
 }
+
+export function transformMenuObject(menu: treemenuObjectType[]): treemenuObjectType[] {
+	const m = menu
+	return m
+}

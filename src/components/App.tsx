@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { styled, theme } from './theme'
 import { findNode } from '../helpers/helpers'
-import { treemenuObjectType, parentKeysType } from '../helpers/types'
+import { treemenuObjectType, ParentNode } from '../helpers/types'
 import Node from './Node'
 import Breadcrumbs from './Breadcrumbs'
 
@@ -28,12 +28,12 @@ function Slidemenu(props: iProps) {
 	const [oddMenuData, setOddMenuData] = useState<treemenuObjectType[] | []>([])
 
 	const [nodeLevel, setNodeLevel] = useState<number>(0)
-	const [parentKeys, setParentKeys] = useState<Array<parentKeysType>>([])
+	const [parentKeys, setParentKeys] = useState<Array<ParentNode>>([])
 	const [condition, setCondition] = useState<'open' | 'close' | ''>('')
 
 	const [oddFade, setOddFade] = useState<'in-left' | 'out-left' | 'in-right' | 'out-right' | ''>('')
 	const [evenFade, setEvenFade] = useState<'in-left' | 'out-left' | 'in-right' | 'out-right' | ''>('')
-	const [breadcrumbs, setBreadcrumbs] = useState<Array<parentKeysType>>([])
+	const [breadcrumbs, setBreadcrumbs] = useState<Array<ParentNode>>([])
 
 	useEffect(() => {
 		loadMenuData(props.menuDataSource)
@@ -83,21 +83,27 @@ function Slidemenu(props: iProps) {
 		}
 	}, [nodeLevel])
 
-	function OpenNode(id: number, title: string) {
-		setCondition('open')
-		setNodeLevel(nodeLevel + 1)
-		const parent = {
-			id: id,
-			Title: title,
-			nodeLevel: nodeLevel + 1,
+	function prepareParentMenuItem(parent: ParentNode): treemenuObjectType {
+		const parentMenuItem: treemenuObjectType = {
+			href: parent.href,
+			text: parent.text,
+			iteration: parent.iteration,
+			id: parent.id,
+			linkId: parent.linkId,
+			isRootCategoryPage: parent.isRootCategoryPage,
+			active: parent.active,
+			subLinks: [],
 		}
-		setParentKeys((prevArray) => [...prevArray, parent])
+		return parentMenuItem
+	}
 
+	function setMenuData(parentMenuItem: treemenuObjectType, id: number) {
 		if (nodeLevel % 2 === 0) {
 			const obj = evenMenuData.filter((p) => p.id === id)
 			if (obj.length > 0) {
 				const firstItem = obj.shift()
 				if (firstItem !== undefined) {
+					firstItem.subLinks.unshift(parentMenuItem)
 					setOddMenuData(firstItem.subLinks)
 				}
 			}
@@ -106,10 +112,21 @@ function Slidemenu(props: iProps) {
 			if (obj.length > 0) {
 				const firstItem = obj.shift()
 				if (firstItem !== undefined) {
+					firstItem.subLinks.unshift(parentMenuItem)
 					setEvenMenuData(firstItem.subLinks)
 				}
 			}
 		}
+	}
+
+	function OpenNode(id: number, parent: ParentNode) {
+		setCondition('open')
+		setNodeLevel(nodeLevel + 1)
+		parent.nodeLevel = nodeLevel + 1
+		setParentKeys((prevArray) => [...prevArray, parent])
+
+		const parentMenuItem: treemenuObjectType = prepareParentMenuItem(parent)
+		setMenuData(parentMenuItem, id)
 	}
 
 	useEffect(() => {

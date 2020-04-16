@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from './theme'
 import NodeItem from './NodeItem'
 import NodeBackLink from './NodeBackLink'
-import { treemenuObjectType } from '../helpers/types'
+import { treemenuObjectType, ParentNode } from '../helpers/types'
 
 const SlideLeftOut = {
 	animationName: {
@@ -116,7 +116,7 @@ interface NodeProps {
 	backButtonText: string
 	onAnimationEnd: () => void
 	backLinkClickHandler: () => void
-	menuClickHandler: (id: number, title: string) => void
+	menuClickHandler: (id: number, node: ParentNode) => void
 	backLink: boolean
 	menuData: treemenuObjectType[]
 }
@@ -129,6 +129,7 @@ function NodeElement(props: NodeProps) {
 			)}
 			{props.menuData.map((data) => (
 				<NodeItem
+					nodeData={data}
 					key={data.id}
 					id={data.id}
 					hasChildren={data.subLinks.length > 0 ? true : false}

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled, pseudo } from './theme'
 import { Style } from '@glitz/type'
+import { treemenuObjectType, ParentNode } from '../helpers/types'
 
 const NodeLink = styled.a({
 	display: 'block',
@@ -58,20 +59,31 @@ const hasChildrenStyles = {
 
 interface IProps {
 	hasChildren: boolean
-	handleClick: (id: number, title: string) => void
+	handleClick: (id: number, node: ParentNode) => void
 	title: string
 	url: string
 	key: number
 	id: number
+	nodeData: treemenuObjectType
 }
 
 function SlideNodeItem(props: IProps) {
+	const [node] = useState<ParentNode>({
+		href: props.nodeData.href,
+		text: props.nodeData.text,
+		iteration: props.nodeData.iteration,
+		id: props.nodeData.id,
+		linkId: props.nodeData.linkId,
+		isRootCategoryPage: props.nodeData.isRootCategoryPage,
+		active: props.nodeData.active,
+		nodeLevel: 0,
+	})
 	return (
 		<li>
 			<NodeLink
 				css={props.hasChildren ? hasChildrenStyles : {}}
 				href={props.url}
-				onClick={() => (props.hasChildren ? props.handleClick(props.id, props.title) : null)}>
+				onClick={() => (props.hasChildren ? props.handleClick(props.id, node) : null)}>
 				{props.title}
 			</NodeLink>
 		</li>
