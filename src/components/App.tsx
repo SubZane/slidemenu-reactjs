@@ -103,7 +103,10 @@ function Slidemenu(props: iProps) {
 			if (obj.length > 0) {
 				const firstItem = obj.shift()
 				if (firstItem !== undefined) {
-					firstItem.subLinks.unshift(parentMenuItem)
+					const dupe = firstItem.subLinks.filter((p) => p.id === parentMenuItem.id)
+					if (dupe.length <= 0) {
+						firstItem.subLinks.unshift(parentMenuItem)
+					}
 					setOddMenuData(firstItem.subLinks)
 				}
 			}
@@ -112,7 +115,10 @@ function Slidemenu(props: iProps) {
 			if (obj.length > 0) {
 				const firstItem = obj.shift()
 				if (firstItem !== undefined) {
-					firstItem.subLinks.unshift(parentMenuItem)
+					const dupe = firstItem.subLinks.filter((p) => p.id === parentMenuItem.id)
+					if (dupe.length <= 0) {
+						firstItem.subLinks.unshift(parentMenuItem)
+					}
 					setEvenMenuData(firstItem.subLinks)
 				}
 			}
@@ -124,7 +130,6 @@ function Slidemenu(props: iProps) {
 		setNodeLevel(nodeLevel + 1)
 		parent.nodeLevel = nodeLevel + 1
 		setParentKeys((prevArray) => [...prevArray, parent])
-
 		const parentMenuItem: treemenuObjectType = prepareParentMenuItem(parent)
 		setMenuData(parentMenuItem, id)
 	}
