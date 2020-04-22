@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { styled, theme } from './theme'
 import { findNode } from '../helpers/helpers'
-import { treemenuObjectType, ParentNode } from '../helpers/types'
+import { treemenuObjectType, fadeType, ParentNode, conditionType } from '../helpers/types'
 import Node from './Node'
 import Breadcrumbs from './Breadcrumbs'
 
@@ -29,10 +29,10 @@ function Slidemenu(props: iProps) {
 
 	const [nodeLevel, setNodeLevel] = useState<number>(0)
 	const [parentKeys, setParentKeys] = useState<Array<ParentNode>>([])
-	const [condition, setCondition] = useState<'open' | 'close' | ''>('')
+	const [condition, setCondition] = useState<conditionType>('')
 
-	const [oddFade, setOddFade] = useState<'in-left' | 'out-left' | 'in-right' | 'out-right' | ''>('')
-	const [evenFade, setEvenFade] = useState<'in-left' | 'out-left' | 'in-right' | 'out-right' | ''>('')
+	const [oddFade, setOddFade] = useState<fadeType>('')
+	const [evenFade, setEvenFade] = useState<fadeType>('')
 	const [breadcrumbs, setBreadcrumbs] = useState<Array<ParentNode>>([])
 
 	useEffect(() => {

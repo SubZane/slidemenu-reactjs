@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from './theme'
 import NodeItem from './NodeItem'
 import NodeBackLink from './NodeBackLink'
-import { treemenuObjectType, ParentNode } from '../helpers/types'
+import { treemenuObjectType, ParentNode, fadeType } from '../helpers/types'
 
 const SlideLeftOut = {
 	animationName: {
@@ -86,7 +86,7 @@ const Hide = {
 	display: 'none',
 }
 
-function getFadeAnimationStyles(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '') {
+function getFadeAnimationStyles(fade: fadeType) {
 	if (fade === 'in-left') {
 		return { ...SlideLeftIn, ...AnimationEffects }
 	} else if (fade === 'in-right') {
@@ -100,7 +100,7 @@ function getFadeAnimationStyles(fade: 'in-left' | 'in-right' | 'out-left' | 'out
 	}
 }
 
-function setStyle(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '', visible: boolean) {
+function setStyle(fade: fadeType, visible: boolean) {
 	const css = getFadeAnimationStyles(fade)
 
 	if (visible) {
@@ -112,7 +112,7 @@ function setStyle(fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | '', 
 
 interface NodeProps {
 	visible: boolean
-	fade: 'in-left' | 'in-right' | 'out-left' | 'out-right' | ''
+	fade: fadeType
 	backButtonText: string
 	onAnimationEnd: () => void
 	backLinkClickHandler: () => void

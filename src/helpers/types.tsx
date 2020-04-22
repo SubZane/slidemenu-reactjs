@@ -36,3 +36,6 @@ export type parentKeysType = {
 	Title: string
 	nodeLevel: number
 }
+
+export type fadeType = 'in-left' | 'out-left' | 'in-right' | 'out-right' | ''
+export type conditionType = 'open' | 'close' | ''
