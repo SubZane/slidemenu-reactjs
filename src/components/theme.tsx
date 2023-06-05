@@ -5,7 +5,7 @@ const {
 	css,
 	createGlobalStyle,
 	keyframes,
-	ThemeProvider
+	ThemeProvider,
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<IThemeInterface>
 
 export interface IThemeInterface {
@@ -16,12 +16,12 @@ export interface IThemeInterface {
 	color: string
 }
 
-export const theme = {
-	backgroundColor: '#EAE9E3',
+export const slidemenuTheme = {
+	backgroundColor: '#E3DFDA',
 	borderRadius: '7px',
 	transitionDuration: '0.5s',
 	width: '100%',
-	color: '#3D3B39'
+	color: '#3D3B39',
 }
 
 export default styled

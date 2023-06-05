@@ -1,22 +1,28 @@
 {
-	"name": "slidemenu",
-	"version": "0.1.1",
-	"private": true,
+	"name": "slidemenu-reactjs",
+	"version": "1.0.0",
+	"private": false,
+	"description": "slidemenu-reactjs is an off-canvas menu component written in ReactJS with TypeScript and Styled Components.",
+	"repository": "https://subzane@github.com/SubZane/slidemenu-reactjs.git",
+	"homepage": "https://subzane.github.io/slidemenu-reactjs",
+	"bugs": "https://github.com/SubZane/slidemenu-reactjs/issues",
+	"author": "Andreas Lee-Norman <andreas@lee-norman.com>",
 	"dependencies": {
-		"@types/node": "^17.0.0",
-		"@types/react-dom": "^17.0.11",
+		"@types/node": "^20.2.5",
+		"@types/react-dom": "^18.2.4",
 		"@types/styled-components": "^5.1.22",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
 		"react-scripts": "^5.0.0",
 		"styled-components": "^5.3.3",
-		"typescript": "^4.5.5"
+		"typescript": "^5.1.3"
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"build": "tsc"
+		"build": "tsc",
+		"postinstall": "fetcher --url=https://subzane@github.com/SubZane/offcanvaspanels-reactjs/blob/master/src/PanelComponent/ --out=src/offcanvaspanel"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
